@@ -1,4 +1,6 @@
 // api/whatsapp.ts - Meta WhatsApp Business Cloud API Webhook Handler
+declare const process: any;
+
 export default async function handler(req: any, res: any) {
   const VERIFY_TOKEN = process.env.WHATSAPP_VERIFY_TOKEN || 'vt_buildos_verify_token_2026';
 

@@ -21,12 +21,13 @@ import { AICopilotDrawer } from './components/AICopilotDrawer';
 import { QuickCreateModal } from './components/QuickCreateModal';
 import { SupabaseModal } from './components/SupabaseModal';
 import { ConstructionSplashScreen } from './components/ConstructionSplashScreen';
-import { organizations, initialProjects } from './data/mockData';
+import { organizations, initialProjects, demoProjects } from './data/mockData';
 import { Organization, TenantId, UserProfile, UserRole, Project } from './types';
 import { dbFetchProjects } from './lib/supabase';
 
 export const App: React.FC = () => {
-  const [showSplash, setShowSplash] = useState(true);
+  // Splash screen starts false so user lands directly into the interactive dashboard
+  const [showSplash, setShowSplash] = useState(false);
   const [currentOrgId, setCurrentOrgId] = useState<TenantId>('vt-dev');
   const [currentRole, setCurrentRole] = useState<UserRole>('Owner');
   const [activeTab, setActiveTab] = useState<string>('dashboard');
@@ -71,6 +72,18 @@ export const App: React.FC = () => {
     }
   };
 
+  const handleLoadDemoData = () => {
+    setProjects(demoProjects);
+  };
+
+  const handleResetData = () => {
+    setProjects([]);
+  };
+
+  const handleAddProject = (p: Project) => {
+    setProjects([p, ...projects]);
+  };
+
   return (
     <div className="flex h-screen bg-[#050811] text-slate-100 font-['Plus_Jakarta_Sans',sans-serif] overflow-hidden">
       {/* Left Sidebar */}
@@ -108,6 +121,11 @@ export const App: React.FC = () => {
                 onNavigateToWorkforce={() => setActiveTab('workforce')}
                 onNavigateToInventory={() => setActiveTab('inventory')}
                 onNavigateToBoq={() => setActiveTab('boq')}
+                onNavigateToFinance={() => setActiveTab('finance')}
+                onNavigateToScheduling={() => setActiveTab('scheduling')}
+                onLoadDemoData={handleLoadDemoData}
+                onResetData={handleResetData}
+                onAddProject={handleAddProject}
               />
             )}
 

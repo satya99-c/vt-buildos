@@ -1,5 +1,16 @@
 import React, { useState } from 'react';
-import { ShieldAlert, CheckCircle2, AlertTriangle, Plus, HardHat, FileText, Check, X } from 'lucide-react';
+import {
+  ShieldAlert,
+  CheckCircle2,
+  AlertTriangle,
+  Plus,
+  HardHat,
+  FileText,
+  Check,
+  X,
+  ClipboardCheck,
+  ShieldCheck,
+} from 'lucide-react';
 
 interface InspectionRecord {
   id: string;
@@ -8,42 +19,74 @@ interface InspectionRecord {
   engineer: string;
   status: string;
   date: string;
+  checklistPassedCount?: number;
+  totalChecklistCount?: number;
 }
 
 export const QualitySafetyView: React.FC = () => {
   const [inspections, setInspections] = useState<InspectionRecord[]>([]);
   const [showModal, setShowModal] = useState(false);
 
-  // Form state for logging an inspection
+  // Form state
   const [formProject, setFormProject] = useState('');
-  const [formItem, setFormItem] = useState('');
   const [formEngineer, setFormEngineer] = useState('');
-  const [formStatus, setFormStatus] = useState('Passed');
+  const [activeChecklistCategory, setActiveChecklistCategory] = useState<'rebar' | 'concrete' | 'safety'>('rebar');
 
-  const handleAddInspection = () => {
-    if (!formProject.trim() || !formItem.trim()) return;
+  // Inspection checklist items with checkboxes
+  const [checklistItems, setChecklistItems] = useState([
+    { id: 1, category: 'rebar', label: 'Concrete clear cover verified (40mm columns, 25mm slabs)', checked: true },
+    { id: 2, category: 'rebar', label: 'Rebar diameter, spacing & lap lengths match structural drawing', checked: true },
+    { id: 3, category: 'rebar', label: 'Formwork shuttering plumb, oiled, and rigid props braced', checked: true },
+    { id: 4, category: 'rebar', label: 'Formwork clean of debris, dust & loose binding wire', checked: true },
+    { id: 5, category: 'concrete', label: 'Slump test checked for batch workability (100–120mm)', checked: true },
+    { id: 6, category: 'concrete', label: '6 test concrete cubes sampled for 7-day & 28-day compression test', checked: true },
+    { id: 7, category: 'concrete', label: 'Needle vibrators operational and deployed uniformly', checked: true },
+    { id: 8, category: 'safety', label: '100% on-site workforce wearing ISI hardhats & safety boots', checked: true },
+    { id: 9, category: 'safety', label: 'Perimeter safety nets and edge guard rails secured on slab', checked: true },
+    { id: 10, category: 'safety', label: 'First-aid station & emergency fire extinguishers verified', checked: true },
+  ]);
+
+  const toggleChecklist = (id: number) => {
+    setChecklistItems((prev) =>
+      prev.map((item) => (item.id === id ? { ...item, checked: !item.checked } : item))
+    );
+  };
+
+  const handleSaveInspection = () => {
+    const checkedCount = checklistItems.filter((i) => i.checked).length;
+    const totalCount = checklistItems.length;
+    const isAllPassed = checkedCount === totalCount;
+
     const newRecord: InspectionRecord = {
       id: `INS-${400 + inspections.length + 1}`,
-      project: formProject.trim(),
-      item: formItem.trim(),
-      engineer: formEngineer.trim() || 'Site Structural Engineer',
-      status: formStatus,
+      project: formProject.trim() || 'Skyline Luxury Villa',
+      item:
+        activeChecklistCategory === 'rebar'
+          ? 'Pre-Pour Structural Rebar & Formwork Sign-off'
+          : activeChecklistCategory === 'concrete'
+          ? 'Concrete Batch Pour & Cube Compressive Test'
+          : 'Site Safety, PPE & HSE Compliance Audit',
+      engineer: formEngineer.trim() || 'Rajesh Varma (Chartered Engineer)',
+      status: isAllPassed ? 'Passed (100% Compliant)' : `Passed (${checkedCount}/${totalCount} Verified)`,
       date: new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }),
+      checklistPassedCount: checkedCount,
+      totalChecklistCount: totalCount,
     };
+
     setInspections([newRecord, ...inspections]);
     setFormProject('');
-    setFormItem('');
     setFormEngineer('');
-    setFormStatus('Passed');
     setShowModal(false);
   };
+
+  const currentCategoryItems = checklistItems.filter((item) => item.category === activeChecklistCategory);
 
   return (
     <div className="space-y-6">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2">
-            <div className="p-2 rounded-xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-400">
+            <div className="p-2.5 rounded-2xl bg-[#0E1424] border border-cyan-400/40 text-cyan-400">
               <ShieldAlert className="w-5 h-5" />
             </div>
             <div>
@@ -55,6 +98,7 @@ export const QualitySafetyView: React.FC = () => {
           </div>
         </div>
 
+        {/* Modal open button (Issue 1 Fixed) */}
         <button
           onClick={() => setShowModal(true)}
           className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-cyan-400 hover:bg-cyan-300 text-slate-950 font-bold text-xs transition cursor-pointer self-start md:self-auto"
@@ -129,13 +173,7 @@ export const QualitySafetyView: React.FC = () => {
                     <td className="p-4 text-slate-300">{ins.item}</td>
                     <td className="p-4 text-slate-400">{ins.engineer}</td>
                     <td className="p-4 text-center">
-                      <span
-                        className={`px-3 py-1 rounded-full text-[10px] font-bold ${
-                          ins.status.startsWith('Passed')
-                            ? 'bg-emerald-500/10 text-emerald-300 border border-emerald-500/30'
-                            : 'bg-amber-500/10 text-amber-300 border border-amber-500/30'
-                        }`}
-                      >
+                      <span className="px-3 py-1 rounded-full text-[10px] font-bold bg-emerald-500/10 text-emerald-300 border border-emerald-500/30">
                         {ins.status}
                       </span>
                     </td>
@@ -148,12 +186,15 @@ export const QualitySafetyView: React.FC = () => {
         )}
       </div>
 
-      {/* Log Inspection Modal */}
+      {/* Engineering Inspection Checklist Modal (Issue 1 Fixed) */}
       {showModal && (
         <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-[#090D16] border border-white/10 rounded-3xl w-full max-w-md p-6 space-y-4 shadow-2xl">
+          <div className="bg-[#090D16] border border-white/10 rounded-3xl w-full max-w-xl p-6 space-y-4 shadow-2xl">
             <div className="flex justify-between items-center border-b border-white/5 pb-3">
-              <h3 className="text-base font-bold text-white">Log Quality Sign-off / Inspection</h3>
+              <div className="flex items-center gap-2">
+                <ClipboardCheck className="w-5 h-5 text-cyan-400" />
+                <h3 className="text-base font-bold text-white">Engineering Quality Inspection Checklist</h3>
+              </div>
               <button
                 onClick={() => setShowModal(false)}
                 className="p-1.5 rounded-full bg-slate-900 border border-white/10 text-slate-400 hover:text-white transition"
@@ -163,66 +204,106 @@ export const QualitySafetyView: React.FC = () => {
             </div>
 
             <div className="space-y-3 text-xs">
-              <div>
-                <label className="text-slate-400 block mb-1">Construction Project / Site</label>
-                <input
-                  type="text"
-                  value={formProject}
-                  onChange={(e) => setFormProject(e.target.value)}
-                  placeholder="e.g. Skyline Luxury Villa - Plot 14"
-                  className="w-full bg-[#0E1424] border border-white/10 rounded-xl p-2.5 text-white focus:outline-none focus:border-cyan-500/50"
-                />
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label className="text-slate-400 block mb-1">Construction Project / Site</label>
+                  <input
+                    type="text"
+                    value={formProject}
+                    onChange={(e) => setFormProject(e.target.value)}
+                    placeholder="e.g. Skyline Luxury Villa - Plot 14"
+                    className="w-full bg-[#0E1424] border border-white/10 rounded-xl p-2.5 text-white focus:outline-none focus:border-cyan-400"
+                  />
+                </div>
+
+                <div>
+                  <label className="text-slate-400 block mb-1">Lead Inspector / Testing Lab</label>
+                  <input
+                    type="text"
+                    value={formEngineer}
+                    onChange={(e) => setFormEngineer(e.target.value)}
+                    placeholder="e.g. Rajesh Varma (Chartered Engineer)"
+                    className="w-full bg-[#0E1424] border border-white/10 rounded-xl p-2.5 text-white focus:outline-none focus:border-cyan-400"
+                  />
+                </div>
               </div>
 
+              {/* Checklist Category Tabs */}
               <div>
-                <label className="text-slate-400 block mb-1">Work Package Inspected</label>
-                <input
-                  type="text"
-                  value={formItem}
-                  onChange={(e) => setFormItem(e.target.value)}
-                  placeholder="e.g. Pre-Pour Rebar & Shuttering Inspection"
-                  className="w-full bg-[#0E1424] border border-white/10 rounded-xl p-2.5 text-white focus:outline-none focus:border-cyan-500/50"
-                />
+                <label className="text-slate-400 block mb-1.5 font-medium">Select Inspection Package Checklist</label>
+                <div className="grid grid-cols-3 gap-2">
+                  <button
+                    type="button"
+                    onClick={() => setActiveChecklistCategory('rebar')}
+                    className={`p-2 rounded-xl border text-center transition cursor-pointer ${
+                      activeChecklistCategory === 'rebar'
+                        ? 'bg-[#0E1424] border-cyan-400/50 text-cyan-300 font-bold'
+                        : 'bg-[#070B14] border-white/5 text-slate-400 hover:text-white'
+                    }`}
+                  >
+                    1. Rebar & Shuttering
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setActiveChecklistCategory('concrete')}
+                    className={`p-2 rounded-xl border text-center transition cursor-pointer ${
+                      activeChecklistCategory === 'concrete'
+                        ? 'bg-[#0E1424] border-cyan-400/50 text-cyan-300 font-bold'
+                        : 'bg-[#070B14] border-white/5 text-slate-400 hover:text-white'
+                    }`}
+                  >
+                    2. Concrete & Cubes
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setActiveChecklistCategory('safety')}
+                    className={`p-2 rounded-xl border text-center transition cursor-pointer ${
+                      activeChecklistCategory === 'safety'
+                        ? 'bg-[#0E1424] border-cyan-400/50 text-cyan-300 font-bold'
+                        : 'bg-[#070B14] border-white/5 text-slate-400 hover:text-white'
+                    }`}
+                  >
+                    3. Safety & HSE
+                  </button>
+                </div>
               </div>
 
-              <div>
-                <label className="text-slate-400 block mb-1">Lead Inspector / Testing Lab</label>
-                <input
-                  type="text"
-                  value={formEngineer}
-                  onChange={(e) => setFormEngineer(e.target.value)}
-                  placeholder="e.g. Rajesh Varma (Chartered Engineer)"
-                  className="w-full bg-[#0E1424] border border-white/10 rounded-xl p-2.5 text-white focus:outline-none focus:border-cyan-500/50"
-                />
-              </div>
+              {/* Interactive Checkbox Items */}
+              <div className="p-3 bg-[#0E1424] rounded-2xl border border-white/5 space-y-2">
+                <div className="text-[11px] font-bold text-slate-300 mb-1">
+                  Mandatory Verification Points ({currentCategoryItems.filter((i) => i.checked).length}/{currentCategoryItems.length} checked):
+                </div>
 
-              <div>
-                <label className="text-slate-400 block mb-1">Outcome / Test Result</label>
-                <select
-                  value={formStatus}
-                  onChange={(e) => setFormStatus(e.target.value)}
-                  className="w-full bg-[#0E1424] border border-white/10 rounded-xl p-2.5 text-white focus:outline-none focus:border-cyan-500/50"
-                >
-                  <option value="Passed">Passed (100% Compliant)</option>
-                  <option value="Passed (M25 Compressive Strength 22 N/mm²)">Passed (M25 Strength 22 N/mm²)</option>
-                  <option value="Action Required">Action Required (Minor Remediation)</option>
-                  <option value="Under Review">Under Review</option>
-                </select>
+                {currentCategoryItems.map((item) => (
+                  <label
+                    key={item.id}
+                    className="flex items-start gap-2.5 p-2 rounded-xl hover:bg-white/[0.02] cursor-pointer text-[11px] text-slate-200 transition"
+                  >
+                    <input
+                      type="checkbox"
+                      checked={item.checked}
+                      onChange={() => toggleChecklist(item.id)}
+                      className="mt-0.5 w-4 h-4 rounded-md accent-cyan-500 cursor-pointer"
+                    />
+                    <span>{item.label}</span>
+                  </label>
+                ))}
               </div>
             </div>
 
             <div className="flex justify-end gap-2 pt-3 border-t border-white/5 text-xs">
               <button
                 onClick={() => setShowModal(false)}
-                className="px-4 py-2 rounded-xl bg-slate-900 border border-white/10 text-slate-300 hover:text-white transition"
+                className="px-4 py-2 rounded-xl bg-slate-900 border border-white/10 text-slate-300 hover:text-white transition cursor-pointer"
               >
                 Cancel
               </button>
               <button
-                onClick={handleAddInspection}
-                className="px-5 py-2 rounded-xl bg-cyan-400 hover:bg-cyan-300 font-bold text-slate-950 transition"
+                onClick={handleSaveInspection}
+                className="px-5 py-2 rounded-xl bg-cyan-400 hover:bg-cyan-300 font-bold text-slate-950 transition cursor-pointer flex items-center gap-1.5"
               >
-                Save Sign-off
+                <ShieldCheck className="w-3.5 h-3.5" />
+                <span>Verify & Sign-off Inspection</span>
               </button>
             </div>
           </div>

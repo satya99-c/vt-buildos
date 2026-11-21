@@ -6,6 +6,16 @@
   }
 }
 
+/* Remove default browser stepper buttons on number inputs across whole website */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none !important;
+  margin: 0 !important;
+}
+input[type="number"] {
+  -moz-appearance: textfield !important;
+}
+
 /* Custom dark scrollbar with smooth rounded track */
 ::-webkit-scrollbar {
   width: 6px;

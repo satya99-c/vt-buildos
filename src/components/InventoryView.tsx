@@ -221,8 +221,9 @@ export const InventoryView: React.FC = () => {
                   <label className="text-slate-400 block mb-1">Unit Rate (₹)</label>
                   <input
                     type="number"
-                    value={newItemRate}
-                    onChange={(e) => setNewItemRate(Number(e.target.value))}
+                    value={newItemRate === 0 ? '' : newItemRate}
+                    placeholder="0"
+                    onChange={(e) => setNewItemRate(e.target.value === '' ? 0 : Number(e.target.value))}
                     className="w-full bg-[#0E1424] border border-white/10 rounded-xl p-2.5 text-white font-mono focus:outline-none focus:border-cyan-500/50"
                   />
                 </div>
@@ -233,8 +234,9 @@ export const InventoryView: React.FC = () => {
                   <label className="text-slate-400 block mb-1">Opening Stock</label>
                   <input
                     type="number"
-                    value={newItemStock}
-                    onChange={(e) => setNewItemStock(Number(e.target.value))}
+                    value={newItemStock === 0 ? '' : newItemStock}
+                    placeholder="0"
+                    onChange={(e) => setNewItemStock(e.target.value === '' ? 0 : Number(e.target.value))}
                     className="w-full bg-[#0E1424] border border-white/10 rounded-xl p-2.5 text-white font-mono focus:outline-none focus:border-cyan-500/50"
                   />
                 </div>
@@ -242,8 +244,9 @@ export const InventoryView: React.FC = () => {
                   <label className="text-slate-400 block mb-1">Min Safety Threshold</label>
                   <input
                     type="number"
-                    value={newItemMin}
-                    onChange={(e) => setNewItemMin(Number(e.target.value))}
+                    value={newItemMin === 0 ? '' : newItemMin}
+                    placeholder="0"
+                    onChange={(e) => setNewItemMin(e.target.value === '' ? 0 : Number(e.target.value))}
                     className="w-full bg-[#0E1424] border border-white/10 rounded-xl p-2.5 text-white font-mono focus:outline-none focus:border-cyan-500/50"
                   />
                 </div>

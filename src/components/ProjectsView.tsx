@@ -37,8 +37,8 @@ export const ProjectsView: React.FC<ProjectsViewProps> = ({
   const [siteAddress, setSiteAddress] = useState('');
   const [contractAmount, setContractAmount] = useState(0);
   const [budgetAmount, setBudgetAmount] = useState(0);
-  const [plotDims, setPlotDims] = useState('50 ft x 80 ft');
-  const [floors, setFloors] = useState(3);
+  const [plotDims, setPlotDims] = useState('');
+  const [floors, setFloors] = useState(0);
   const [buildingType, setBuildingType] = useState('Residential Villa');
   const [saving, setSaving] = useState(false);
 
@@ -409,9 +409,9 @@ export const ProjectsView: React.FC<ProjectsViewProps> = ({
                 <label className="text-slate-400 block mb-1 font-medium">Contract Amount (₹)</label>
                 <input
                   type="number"
-                  value={contractAmount}
-                  onChange={(e) => setContractAmount(Number(e.target.value))}
-                  placeholder="28500000"
+                  value={contractAmount === 0 ? '' : contractAmount}
+                  placeholder="0"
+                  onChange={(e) => setContractAmount(e.target.value === '' ? 0 : Number(e.target.value))}
                   className="w-full bg-[#111726] border border-slate-700/80 rounded-2xl p-2.5 text-white font-mono focus:outline-none focus:border-cyan-400"
                 />
               </div>
@@ -420,9 +420,9 @@ export const ProjectsView: React.FC<ProjectsViewProps> = ({
                 <label className="text-slate-400 block mb-1 font-medium">Estimated Budget (₹)</label>
                 <input
                   type="number"
-                  value={budgetAmount}
-                  onChange={(e) => setBudgetAmount(Number(e.target.value))}
-                  placeholder="25000000"
+                  value={budgetAmount === 0 ? '' : budgetAmount}
+                  placeholder="0"
+                  onChange={(e) => setBudgetAmount(e.target.value === '' ? 0 : Number(e.target.value))}
                   className="w-full bg-[#111726] border border-slate-700/80 rounded-2xl p-2.5 text-white font-mono focus:outline-none focus:border-cyan-400"
                 />
               </div>
@@ -433,7 +433,7 @@ export const ProjectsView: React.FC<ProjectsViewProps> = ({
                   type="text"
                   value={plotDims}
                   onChange={(e) => setPlotDims(e.target.value)}
-                  placeholder="50 ft x 80 ft"
+                  placeholder="e.g. 50 ft x 80 ft"
                   className="w-full bg-[#111726] border border-slate-700/80 rounded-2xl p-2.5 text-white focus:outline-none focus:border-cyan-400"
                 />
               </div>
@@ -442,10 +442,10 @@ export const ProjectsView: React.FC<ProjectsViewProps> = ({
                 <label className="text-slate-400 block mb-1 font-medium">Floors</label>
                 <input
                   type="number"
-                  value={floors}
-                  onChange={(e) => setFloors(Number(e.target.value))}
-                  placeholder="3"
-                  className="w-full bg-[#111726] border border-slate-700/80 rounded-2xl p-2.5 text-white focus:outline-none focus:border-cyan-400"
+                  value={floors === 0 ? '' : floors}
+                  placeholder="0"
+                  onChange={(e) => setFloors(e.target.value === '' ? 0 : Number(e.target.value))}
+                  className="w-full bg-[#111726] border border-slate-700/80 rounded-2xl p-2.5 text-white font-mono focus:outline-none focus:border-cyan-400"
                 />
               </div>
             </div>

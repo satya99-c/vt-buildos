@@ -90,10 +90,12 @@ export const App: React.FC = () => {
         <Header
           currentOrg={currentOrg}
           user={currentUser}
+          projects={projects}
           onOpenQuickCreate={() => setIsQuickCreateOpen(true)}
           onOpenAiAssistant={() => setIsAiOpen(true)}
           onOpenSupabaseModal={() => setIsSupabaseModalOpen(true)}
           onReplaySplash={() => setShowSplash(true)}
+          onNavigateTab={(tab) => setActiveTab(tab)}
         />
 
         {/* View Content (Scrollable) */}

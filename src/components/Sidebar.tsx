@@ -17,6 +17,7 @@ import {
   ChevronDown,
   Building,
   Image as ImageIcon,
+  MessageSquare,
 } from 'lucide-react';
 import { Organization, TenantId, UserRole } from '../types';
 
@@ -75,6 +76,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
     {
       title: 'PORTALS & UTILITIES',
       items: [
+        { id: 'whatsapp-sync', label: 'WhatsApp Autonomous Sync', icon: MessageSquare, badge: 'Live Bot' },
         { id: 'customer-portal', label: 'Customer Portal', icon: Building, badge: 'Escrow' },
         { id: 'mobile-app', label: 'Site Engineer Mobile App', icon: Smartphone, badge: 'Offline' },
         { id: 'import-center', label: 'Data Import Center', icon: FileSpreadsheet, badge: 'CSV / Excel' },

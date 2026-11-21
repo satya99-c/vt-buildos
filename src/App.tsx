@@ -16,6 +16,7 @@ import { CustomerPortalView } from './components/CustomerPortalView';
 import { MobileSimulatorView } from './components/MobileSimulatorView';
 import { DataImportCenterView } from './components/DataImportCenterView';
 import { ReferenceGalleryView } from './components/ReferenceGalleryView';
+import { WhatsAppSyncView } from './components/WhatsAppSyncView';
 import { AICopilotDrawer } from './components/AICopilotDrawer';
 import { QuickCreateModal } from './components/QuickCreateModal';
 import { SupabaseModal } from './components/SupabaseModal';
@@ -139,6 +140,13 @@ export const App: React.FC = () => {
             {activeTab === 'mobile-app' && <MobileSimulatorView />}
 
             {activeTab === 'import-center' && <DataImportCenterView />}
+
+            {activeTab === 'whatsapp-sync' && (
+              <WhatsAppSyncView
+                projects={projects}
+                onProjectCreated={(newP) => setProjects([newP, ...projects])}
+              />
+            )}
 
             {activeTab === 'references' && <ReferenceGalleryView />}
           </div>

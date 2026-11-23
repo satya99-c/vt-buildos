@@ -15,10 +15,25 @@ import {
 import { PurchaseOrder } from '../types';
 import { initialPurchaseOrders } from '../data/mockData';
 
-export const ProcurementView: React.FC = () => {
+interface ProcurementViewProps {
+  autoOpenCreateModal?: boolean;
+  onModalConsumed?: () => void;
+}
+
+export const ProcurementView: React.FC<ProcurementViewProps> = ({
+  autoOpenCreateModal,
+  onModalConsumed,
+}) => {
   const [purchaseOrders, setPurchaseOrders] = useState<PurchaseOrder[]>(initialPurchaseOrders);
   const [activeWorkflowStep, setActiveWorkflowStep] = useState(0);
   const [showPoModal, setShowPoModal] = useState(false);
+
+  React.useEffect(() => {
+    if (autoOpenCreateModal) {
+      setShowPoModal(true);
+      if (onModalConsumed) onModalConsumed();
+    }
+  }, [autoOpenCreateModal]);
 
   // Form states
   const [supplierName, setSupplierName] = useState('');

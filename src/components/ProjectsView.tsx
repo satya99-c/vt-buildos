@@ -18,11 +18,15 @@ interface ProjectsViewProps {
   projects: Project[];
   onSelectProjectForCustomerView?: (project: Project) => void;
   onProjectsChange?: (projects: Project[]) => void;
+  autoOpenCreateModal?: boolean;
+  onModalConsumed?: () => void;
 }
 
 export const ProjectsView: React.FC<ProjectsViewProps> = ({
   projects: initialPropsProjects,
   onProjectsChange,
+  autoOpenCreateModal,
+  onModalConsumed,
 }) => {
   const [projects, setProjects] = useState<Project[]>(initialPropsProjects);
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
@@ -30,6 +34,13 @@ export const ProjectsView: React.FC<ProjectsViewProps> = ({
   const [selectedPhase, setSelectedPhase] = useState('All');
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [showNewProjectModal, setShowNewProjectModal] = useState(false);
+
+  useEffect(() => {
+    if (autoOpenCreateModal) {
+      setShowNewProjectModal(true);
+      if (onModalConsumed) onModalConsumed();
+    }
+  }, [autoOpenCreateModal]);
 
   // New project form state
   const [projectName, setProjectName] = useState('');

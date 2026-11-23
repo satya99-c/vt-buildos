@@ -35,6 +35,12 @@ export const App: React.FC = () => {
   const [isAiOpen, setIsAiOpen] = useState(false);
   const [isQuickCreateOpen, setIsQuickCreateOpen] = useState(false);
   const [isSupabaseModalOpen, setIsSupabaseModalOpen] = useState(false);
+  const [activeActionModal, setActiveActionModal] = useState<string | null>(null);
+
+  const handleSelectQuickAction = (actionId: string) => {
+    setActiveTab(actionId);
+    setActiveActionModal(actionId);
+  };
 
   // Sync projects from Supabase if connected
   const refreshProjectsFromDb = async () => {
@@ -134,16 +140,38 @@ export const App: React.FC = () => {
                 projects={projects}
                 onProjectsChange={(updated) => setProjects(updated)}
                 onSelectProjectForCustomerView={() => setActiveTab('customer-portal')}
+                autoOpenCreateModal={activeActionModal === 'projects'}
+                onModalConsumed={() => setActiveActionModal(null)}
               />
             )}
 
-            {activeTab === 'workforce' && <WorkforceView />}
+            {activeTab === 'workforce' && (
+              <WorkforceView
+                autoOpenAddModal={activeActionModal === 'workforce'}
+                onModalConsumed={() => setActiveActionModal(null)}
+              />
+            )}
 
-            {activeTab === 'inventory' && <InventoryView />}
+            {activeTab === 'inventory' && (
+              <InventoryView
+                autoOpenAddModal={activeActionModal === 'inventory'}
+                onModalConsumed={() => setActiveActionModal(null)}
+              />
+            )}
 
-            {activeTab === 'procurement' && <ProcurementView />}
+            {activeTab === 'procurement' && (
+              <ProcurementView
+                autoOpenCreateModal={activeActionModal === 'procurement'}
+                onModalConsumed={() => setActiveActionModal(null)}
+              />
+            )}
 
-            {activeTab === 'finance' && <FinanceView />}
+            {activeTab === 'finance' && (
+              <FinanceView
+                autoOpenCreateModal={activeActionModal === 'finance'}
+                onModalConsumed={() => setActiveActionModal(null)}
+              />
+            )}
 
             {activeTab === 'boq' && <BOQEstimatorView />}
 
@@ -194,7 +222,7 @@ export const App: React.FC = () => {
       <QuickCreateModal
         isOpen={isQuickCreateOpen}
         onClose={() => setIsQuickCreateOpen(false)}
-        onSelectAction={(tabId) => setActiveTab(tabId)}
+        onSelectAction={handleSelectQuickAction}
       />
 
       {/* Animated Construction Intro Splash Screen (Click anywhere to enter) */}

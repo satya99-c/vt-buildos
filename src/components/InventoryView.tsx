@@ -16,7 +16,15 @@ import {
 import { InventoryItem } from '../types';
 import { initialInventory } from '../data/mockData';
 
-export const InventoryView: React.FC = () => {
+interface InventoryViewProps {
+  autoOpenAddModal?: boolean;
+  onModalConsumed?: () => void;
+}
+
+export const InventoryView: React.FC<InventoryViewProps> = ({
+  autoOpenAddModal,
+  onModalConsumed,
+}) => {
   const [inventory, setInventory] = useState<InventoryItem[]>(initialInventory);
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const [searchTerm, setSearchTerm] = useState('');
@@ -24,6 +32,13 @@ export const InventoryView: React.FC = () => {
 
   // New item modal
   const [showAddItemModal, setShowAddItemModal] = useState(false);
+
+  React.useEffect(() => {
+    if (autoOpenAddModal) {
+      setShowAddItemModal(true);
+      if (onModalConsumed) onModalConsumed();
+    }
+  }, [autoOpenAddModal]);
   const [newItemName, setNewItemName] = useState('');
   const [newItemCat, setNewItemCat] = useState<'Cement' | 'Steel' | 'Aggregates' | 'Masonry' | 'Electrical' | 'Plumbing' | 'Finishes'>('Cement');
   const [newItemUnit, setNewItemUnit] = useState('Bags');

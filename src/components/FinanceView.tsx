@@ -12,9 +12,24 @@ import {
 import { JournalEntry } from '../types';
 import { initialJournalEntries } from '../data/mockData';
 
-export const FinanceView: React.FC = () => {
+interface FinanceViewProps {
+  autoOpenCreateModal?: boolean;
+  onModalConsumed?: () => void;
+}
+
+export const FinanceView: React.FC<FinanceViewProps> = ({
+  autoOpenCreateModal,
+  onModalConsumed,
+}) => {
   const [entries, setEntries] = useState<JournalEntry[]>(initialJournalEntries);
   const [showNewEntryModal, setShowNewEntryModal] = useState(false);
+
+  React.useEffect(() => {
+    if (autoOpenCreateModal) {
+      setShowNewEntryModal(true);
+      if (onModalConsumed) onModalConsumed();
+    }
+  }, [autoOpenCreateModal]);
 
   // Form states
   const [accountHead, setAccountHead] = useState('HDFC Bank Operative A/c');

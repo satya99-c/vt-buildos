@@ -11,7 +11,15 @@ import {
 import { WorkerAttendance } from '../types';
 import { initialWorkers } from '../data/mockData';
 
-export const WorkforceView: React.FC = () => {
+interface WorkforceViewProps {
+  autoOpenAddModal?: boolean;
+  onModalConsumed?: () => void;
+}
+
+export const WorkforceView: React.FC<WorkforceViewProps> = ({
+  autoOpenAddModal,
+  onModalConsumed,
+}) => {
   const [workers, setWorkers] = useState<WorkerAttendance[]>(initialWorkers);
   const [selectedSite, setSelectedSite] = useState<string>('All');
   const [searchTerm, setSearchTerm] = useState('');
@@ -23,6 +31,13 @@ export const WorkforceView: React.FC = () => {
 
   // New worker modal state
   const [showAddModal, setShowAddModal] = useState(false);
+
+  React.useEffect(() => {
+    if (autoOpenAddModal) {
+      setShowAddModal(true);
+      if (onModalConsumed) onModalConsumed();
+    }
+  }, [autoOpenAddModal]);
   const [newWorkerName, setNewWorkerName] = useState('');
   const [newWorkerRole, setNewWorkerRole] = useState('Mason');
   const [newWorkerWage, setNewWorkerWage] = useState<number>(0); // default 0 with manual typing

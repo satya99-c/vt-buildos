@@ -141,7 +141,7 @@ export const WorkforceView: React.FC<WorkforceViewProps> = ({
           className="flex items-center gap-1.5 px-5 py-2.5 rounded-full bg-cyan-400 hover:bg-cyan-300 text-slate-950 text-xs font-bold transition cursor-pointer self-start md:self-auto shadow-sm"
         >
           <Plus className="w-4 h-4 stroke-[3]" />
-          <span>+ Add Worker</span>
+          <span>Add Worker</span>
         </button>
       </div>
 

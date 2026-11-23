@@ -103,7 +103,7 @@ export const InventoryView: React.FC<InventoryViewProps> = ({
           className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs shadow-lg shadow-cyan-500/20 transition cursor-pointer self-start md:self-auto"
         >
           <Plus className="w-4 h-4 stroke-[3]" />
-          <span>+ Add Material Item</span>
+          <span>Add Material Item</span>
         </button>
       </div>
 

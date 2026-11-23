@@ -208,7 +208,7 @@ export const SchedulingView: React.FC = () => {
             className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-cyan-400 hover:bg-cyan-300 text-slate-950 text-xs font-bold transition cursor-pointer shadow-sm"
           >
             <Plus className="w-4 h-4 stroke-[3]" />
-            <span>+ Add Milestone</span>
+            <span>Add Milestone</span>
           </button>
         </div>
       </div>

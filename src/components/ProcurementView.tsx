@@ -97,7 +97,7 @@ export const ProcurementView: React.FC<ProcurementViewProps> = ({
           className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-cyan-400 hover:bg-cyan-300 text-slate-950 font-bold text-xs transition cursor-pointer self-start md:self-auto"
         >
           <Plus className="w-4 h-4 stroke-[3]" />
-          <span>+ Create Purchase Requisition</span>
+          <span>Create Purchase Requisition</span>
         </button>
       </div>
 

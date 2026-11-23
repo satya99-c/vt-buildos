@@ -248,10 +248,10 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
 
           <button
             onClick={() => setShowQuickAddModal(true)}
-            className="flex items-center gap-1 px-3 py-1.5 rounded-xl bg-cyan-400 hover:bg-cyan-300 text-slate-950 text-xs font-bold transition cursor-pointer shadow-sm"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-cyan-400 hover:bg-cyan-300 text-slate-950 text-xs font-bold transition cursor-pointer shadow-sm"
           >
             <Plus className="w-3.5 h-3.5 stroke-[3]" />
-            <span>+ Quick Project</span>
+            <span>Quick Project</span>
           </button>
         </div>
       </div>
@@ -363,7 +363,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
               onClick={onNavigateToBoq}
               className="w-full py-2.5 px-4 rounded-2xl bg-cyan-400 hover:bg-cyan-300 text-slate-950 text-xs font-bold flex items-center justify-center gap-1.5 transition cursor-pointer shadow-sm"
             >
-              <span>+ Calculate BOQ & Quotation</span>
+              <span>Calculate BOQ & Quotation</span>
               <ChevronRight className="w-3.5 h-3.5 stroke-[3]" />
             </button>
           </div>
@@ -723,7 +723,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
             onClick={() => setShowQuickAddModal(true)}
             className="px-3.5 py-2 rounded-xl bg-cyan-400 hover:bg-cyan-300 text-slate-950 text-xs font-bold transition cursor-pointer"
           >
-            + New Site Project
+            New Site Project
           </button>
           <button
             onClick={onNavigateToBoq}

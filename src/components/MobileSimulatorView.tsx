@@ -143,7 +143,7 @@ export const MobileSimulatorView: React.FC = () => {
                     </div>
                     <button className="w-full py-2.5 rounded-2xl bg-cyan-400 text-slate-950 font-bold text-xs flex items-center justify-center gap-1.5 shadow-sm">
                       <Plus className="w-3.5 h-3.5 stroke-[3]" />
-                      <span>+ Add Task</span>
+                      <span>Add Task</span>
                     </button>
                   </div>
                 )}

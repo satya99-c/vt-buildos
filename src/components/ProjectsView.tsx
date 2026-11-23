@@ -148,7 +148,7 @@ export const ProjectsView: React.FC<ProjectsViewProps> = ({
           className="flex items-center gap-2 px-5 py-2.5 rounded-2xl bg-cyan-400 hover:bg-cyan-300 text-slate-950 font-bold text-xs shadow-sm transition cursor-pointer self-start md:self-auto"
         >
           <Plus className="w-4 h-4 stroke-[3]" />
-          <span>+ Add New Project</span>
+          <span>Add New Project</span>
         </button>
       </div>
 
@@ -230,7 +230,7 @@ export const ProjectsView: React.FC<ProjectsViewProps> = ({
             onClick={() => setShowNewProjectModal(true)}
             className="px-5 py-2.5 rounded-2xl bg-cyan-400 text-slate-950 font-bold text-xs hover:bg-cyan-300 transition"
           >
-            + Create First Project
+            Create First Project
           </button>
         </div>
       ) : viewMode === 'grid' ? (

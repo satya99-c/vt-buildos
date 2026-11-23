@@ -7,7 +7,9 @@ import {
   Building,
   Check,
   X,
+  FileText,
 } from 'lucide-react';
+import { jsPDF } from 'jspdf';
 
 export const BOQEstimatorView: React.FC = () => {
   // Input parameters - Defaulted to 0 with manual entry (Issue 1)
@@ -57,14 +59,227 @@ export const BOQEstimatorView: React.FC = () => {
   const grandQuotationTotal = directCivilCost + contractorMargin;
   const ratePerSqFt = totalBuiltUpArea > 0 ? Math.round(grandQuotationTotal / totalBuiltUpArea) : 0;
 
-  // Print/Export to PDF function (Issue 2)
-  const handlePrintPdf = () => {
-    const printWindow = window.open('', '_blank');
-    if (!printWindow) {
-      alert('Please allow popups to export the quotation PDF.');
-      return;
-    }
+  // Direct 1-Click PDF Download using jsPDF (Issue Fixed: No popup blocker, direct file download)
+  const handleDownloadPdf = () => {
+    try {
+      const doc = new jsPDF({
+        orientation: 'portrait',
+        unit: 'mm',
+        format: 'a4',
+      });
 
+      const quotationRef = `VT-QUOT-${Date.now().toString().slice(-6)}`;
+      const todayDate = new Date().toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' });
+      const client = clientName.trim() || 'Valued Client';
+      const project = projectName.trim() || 'Residential Construction Turnkey';
+
+      // Top Dark Header Bar
+      doc.setFillColor(15, 23, 42); // #0f172a
+      doc.rect(0, 0, 210, 24, 'F');
+
+      doc.setTextColor(255, 255, 255);
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(16);
+      doc.text('VT DEVELOPERS', 14, 12);
+
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(8.5);
+      doc.setTextColor(56, 189, 248); // sky-400
+      doc.text('ENGINEERING EXCELLENCE · TURNKEY CIVIL CONSTRUCTION', 14, 18);
+
+      doc.setFontSize(8);
+      doc.setTextColor(226, 232, 240);
+      doc.text(`REF: ${quotationRef}`, 196, 11, { align: 'right' });
+      doc.text(`DATE: ${todayDate}`, 196, 17, { align: 'right' });
+
+      // Particulars Boxes
+      let y = 32;
+
+      // Box 1: Client & Project Info
+      doc.setFillColor(248, 250, 252);
+      doc.setDrawColor(226, 232, 240);
+      doc.roundedRect(14, y, 88, 28, 2, 2, 'FD');
+
+      doc.setTextColor(15, 23, 42);
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(9);
+      doc.text('CLIENT & PROPOSAL DETAILS', 18, y + 6);
+
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(8);
+      doc.setTextColor(71, 85, 105);
+      doc.text(`Client: ${client}`, 18, y + 12);
+      doc.text(`Project: ${project}`, 18, y + 17);
+      doc.text(`Finish Tier: ${finishQuality} Specification`, 18, y + 22);
+
+      // Box 2: Site Dimensions & Built-Up Area
+      doc.setFillColor(248, 250, 252);
+      doc.roundedRect(108, y, 88, 28, 2, 2, 'FD');
+
+      doc.setTextColor(15, 23, 42);
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(9);
+      doc.text('SITE & AREA SPECIFICATIONS', 112, y + 6);
+
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(8);
+      doc.setTextColor(71, 85, 105);
+      doc.text(`Plot: ${plotWidth} ft x ${plotLength} ft (${plotAreaSqFt} sq.ft / ${plotAreaSqYds} sq.yds)`, 112, y + 12);
+      doc.text(`Floors: ${floors} Floors (G+${Math.max(0, floors - 1)})`, 112, y + 17);
+      doc.text(`Total Built-up Area: ${totalBuiltUpArea.toLocaleString()} sq.ft`, 112, y + 22);
+
+      y += 34;
+
+      // Table Title Banner
+      doc.setFillColor(241, 245, 249);
+      doc.rect(14, y, 182, 7, 'F');
+      doc.setFillColor(2, 132, 199);
+      doc.rect(14, y, 2.5, 7, 'F');
+
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(8.5);
+      doc.setTextColor(15, 23, 42);
+      doc.text('ITEMIZED BILL OF QUANTITIES (BOQ) & MATERIAL RATE BREAKDOWN', 19, y + 5);
+
+      y += 9;
+
+      // Table Header
+      doc.setFillColor(15, 23, 42);
+      doc.rect(14, y, 182, 7, 'F');
+
+      doc.setTextColor(255, 255, 255);
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(7.5);
+      doc.text('ITEM DESCRIPTION', 16, y + 5);
+      doc.text('CATEGORY', 80, y + 5);
+      doc.text('QUANTITY', 118, y + 5, { align: 'right' });
+      doc.text('UNIT', 124, y + 5);
+      doc.text('UNIT RATE (INR)', 162, y + 5, { align: 'right' });
+      doc.text('AMOUNT (INR)', 194, y + 5, { align: 'right' });
+
+      y += 7;
+
+      // Table Rows
+      const items = [
+        { desc: 'UltraTech PPC / OPC 53 Grade Cement', cat: 'Cement', qty: cementBags.toLocaleString(), unit: '50kg Bags', rate: '380', amt: cementCost.toLocaleString() },
+        { desc: 'Tata Tiscon Fe 550D TMT Reinforcement Steel', cat: 'Steel', qty: steelTons.toString(), unit: 'Metric Ton', rate: '64,500', amt: steelCost.toLocaleString() },
+        { desc: 'Zone-II Double Washed River Sand / M-Sand', cat: 'Sand', qty: sandBrass.toString(), unit: 'Brass', rate: '3,800', amt: sandCost.toLocaleString() },
+        { desc: '20mm Granite Blue Metal Coarse Aggregate', cat: 'Aggregates', qty: aggregateBrass.toString(), unit: 'Brass', rate: '3,200', amt: aggregateCost.toLocaleString() },
+        { desc: 'First Class Table-Moulded Wirecut Bricks', cat: 'Masonry', qty: brickPcs.toLocaleString(), unit: 'Pcs', rate: '9.50', amt: brickCost.toLocaleString() },
+        { desc: 'Kajaria Vitrified Flooring & Wall Tiles', cat: 'Finishes', qty: totalBuiltUpArea > 0 ? (totalBuiltUpArea * 1.2).toLocaleString() : '0', unit: 'Sq.Ft', rate: tileRate.toString(), amt: tileCost.toLocaleString() },
+        { desc: 'Concealed MEP (Polycab & Supreme CPVC)', cat: 'Services', qty: totalBuiltUpArea.toLocaleString(), unit: 'Sq.Ft', rate: mepRate.toString(), amt: mepCost.toLocaleString() },
+        { desc: 'Direct Civil & Structural Labour Wages', cat: 'Labour', qty: totalBuiltUpArea.toLocaleString(), unit: 'Sq.Ft', rate: labourRate.toString(), amt: labourCost.toLocaleString() },
+      ];
+
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(7.5);
+
+      items.forEach((item, index) => {
+        if (index % 2 === 1) {
+          doc.setFillColor(248, 250, 252);
+          doc.rect(14, y, 182, 6.5, 'F');
+        }
+        doc.setDrawColor(241, 245, 249);
+        doc.line(14, y + 6.5, 196, y + 6.5);
+
+        doc.setTextColor(15, 23, 42);
+        doc.setFont('helvetica', 'bold');
+        doc.text(item.desc, 16, y + 4.5);
+
+        doc.setFont('helvetica', 'normal');
+        doc.setTextColor(71, 85, 105);
+        doc.text(item.cat, 80, y + 4.5);
+        doc.text(item.qty, 118, y + 4.5, { align: 'right' });
+        doc.text(item.unit, 124, y + 4.5);
+        doc.text(`INR ${item.rate}`, 162, y + 4.5, { align: 'right' });
+        doc.setTextColor(15, 23, 42);
+        doc.setFont('helvetica', 'bold');
+        doc.text(`INR ${item.amt}`, 194, y + 4.5, { align: 'right' });
+
+        y += 6.5;
+      });
+
+      y += 5;
+
+      // Financial Summary Box
+      const summaryX = 110;
+      doc.setFillColor(248, 250, 252);
+      doc.setDrawColor(226, 232, 240);
+      doc.roundedRect(summaryX, y, 86, 32, 2, 2, 'FD');
+
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(8);
+      doc.setTextColor(71, 85, 105);
+
+      doc.text('Direct Materials Cost:', summaryX + 4, y + 6);
+      doc.text(`INR ${totalMaterialCost.toLocaleString()}`, 192, y + 6, { align: 'right' });
+
+      doc.text('Direct Site Labour:', summaryX + 4, y + 11);
+      doc.text(`INR ${labourCost.toLocaleString()}`, 192, y + 11, { align: 'right' });
+
+      doc.text(`Contractor Margin (${contractorMarginPct}%):`, summaryX + 4, y + 16);
+      doc.text(`+INR ${contractorMargin.toLocaleString()}`, 192, y + 16, { align: 'right' });
+
+      // Grand Total Highlight
+      doc.setFillColor(15, 23, 42);
+      doc.rect(summaryX, y + 20, 86, 12, 'F');
+
+      doc.setTextColor(255, 255, 255);
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(9);
+      doc.text('GRAND TOTAL ESTIMATE:', summaryX + 4, y + 26);
+      doc.setFontSize(10);
+      doc.text(`INR ${grandQuotationTotal.toLocaleString('en-IN')}`, 192, y + 26, { align: 'right' });
+
+      doc.setFontSize(7.5);
+      doc.setTextColor(56, 189, 248);
+      doc.text(`Unit Rate: INR ${ratePerSqFt.toLocaleString()} / sq.ft`, summaryX + 4, y + 30);
+
+      // Left terms box
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(8);
+      doc.setTextColor(15, 23, 42);
+      doc.text('STATUTORY & IS 456 TERMS:', 14, y + 6);
+
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(7);
+      doc.setTextColor(100, 116, 139);
+      doc.text('1. Grounded in IS 456:2000 plain & reinforced concrete standards.', 14, y + 11);
+      doc.text('2. Concrete cube compressive strength verified at 7, 14, and 28 days.', 14, y + 16);
+      doc.text('3. Milestones: 10% Advance, 20% Plinth, 40% Slabs, 20% MEP, 10% Handover.', 14, y + 21);
+      doc.text('4. Quotation valid for 30 calendar days from issuance.', 14, y + 26);
+
+      // Sign-off section
+      y += 42;
+      doc.setDrawColor(203, 213, 225);
+      doc.line(14, y + 12, 65, y + 12);
+      doc.line(145, y + 12, 196, y + 12);
+
+      doc.setFontSize(7.5);
+      doc.setTextColor(71, 85, 105);
+      doc.text('Client Acceptance Signature', 14, y + 16);
+      doc.text('For VT Developers (Authorized)', 145, y + 16);
+
+      // Footer bar
+      doc.setFillColor(15, 23, 42);
+      doc.rect(0, 287, 210, 10, 'F');
+      doc.setTextColor(148, 163, 184);
+      doc.setFontSize(7);
+      doc.text('VT BuildOS ERP · Confidential Client Commercial Quotation · Powered by VT Developers', 105, 293, { align: 'center' });
+
+      // Save and trigger browser download
+      const safeFileName = `VT-Quotation-${(clientName.trim() || 'Client').replace(/[^a-zA-Z0-9_-]/g, '_')}-${quotationRef}.pdf`;
+      doc.save(safeFileName);
+      setShowPdfModal(false);
+    } catch (err) {
+      console.error('Failed to generate PDF with jsPDF:', err);
+      // Fallback to print
+      handlePrintPdf();
+    }
+  };
+
+  // Popup-blocker-free hidden iframe printing
+  const handlePrintPdf = () => {
     const todayDate = new Date().toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' });
     const quotationRef = `VT-QUOT-${Date.now().toString().slice(-6)}`;
 
@@ -182,7 +397,7 @@ export const BOQEstimatorView: React.FC = () => {
             <tr>
               <td><strong>Vitrified Flooring & Designer Wall Tiles</strong></td>
               <td>Finishes</td>
-              <td class="text-right font-mono">${(totalBuiltUpArea * 1.2).toLocaleString()}</td>
+              <td class="text-right font-mono">${totalBuiltUpArea > 0 ? (totalBuiltUpArea * 1.2).toLocaleString() : '0'}</td>
               <td>Sq.Ft</td>
               <td class="text-right font-mono">₹${tileRate}</td>
               <td class="text-right font-mono">₹${tileCost.toLocaleString()}</td>
@@ -240,18 +455,38 @@ export const BOQEstimatorView: React.FC = () => {
           2. Steel and cement variances beyond ±5% will be adjusted based on prevailing market vouchers.<br/>
           3. Payment milestone schedule: 10% Advance on Agreement, 20% Foundation, 40% Floor Slabs, 20% Plastering & MEP, 10% Handover.
         </div>
-
-        <script>
-          window.onload = function() {
-            window.print();
-          }
-        </script>
       </body>
       </html>
     `;
 
-    printWindow.document.write(htmlContent);
-    printWindow.document.close();
+    // Use invisible iframe to bypass popup blockers entirely
+    const existingIframe = document.getElementById('vt-quotation-iframe');
+    if (existingIframe) {
+      existingIframe.remove();
+    }
+
+    const iframe = document.createElement('iframe');
+    iframe.id = 'vt-quotation-iframe';
+    iframe.style.position = 'fixed';
+    iframe.style.right = '0';
+    iframe.style.bottom = '0';
+    iframe.style.width = '0';
+    iframe.style.height = '0';
+    iframe.style.border = '0';
+    document.body.appendChild(iframe);
+
+    const doc = iframe.contentWindow?.document;
+    if (doc) {
+      doc.open();
+      doc.write(htmlContent);
+      doc.close();
+
+      setTimeout(() => {
+        iframe.contentWindow?.focus();
+        iframe.contentWindow?.print();
+      }, 250);
+    }
+    setShowPdfModal(false);
   };
 
   return (
@@ -551,22 +786,26 @@ export const BOQEstimatorView: React.FC = () => {
               </div>
             </div>
 
-            <div className="flex justify-end gap-2 pt-3 border-t border-white/5 text-xs">
+            <div className="flex flex-wrap justify-end gap-2 pt-3 border-t border-white/5 text-xs">
               <button
                 onClick={() => setShowPdfModal(false)}
-                className="px-4 py-2 rounded-xl bg-slate-900 border border-white/10 text-slate-300 hover:text-white transition"
+                className="px-4 py-2 rounded-xl bg-slate-900 border border-white/10 text-slate-300 hover:text-white transition cursor-pointer"
               >
                 Cancel
               </button>
               <button
-                onClick={() => {
-                  setShowPdfModal(false);
-                  handlePrintPdf();
-                }}
-                className="px-5 py-2 rounded-xl bg-cyan-400 hover:bg-cyan-300 font-bold text-slate-950 transition flex items-center gap-1.5"
+                onClick={handlePrintPdf}
+                className="px-4 py-2 rounded-xl bg-[#12192B] hover:bg-[#1a253e] border border-slate-700 text-slate-200 hover:text-white transition flex items-center gap-1.5 cursor-pointer"
+              >
+                <Printer className="w-3.5 h-3.5" />
+                <span>Print</span>
+              </button>
+              <button
+                onClick={handleDownloadPdf}
+                className="px-5 py-2 rounded-xl bg-cyan-400 hover:bg-cyan-300 font-bold text-slate-950 transition flex items-center gap-1.5 shadow-md cursor-pointer"
               >
                 <Download className="w-3.5 h-3.5" />
-                <span>Generate & Print PDF</span>
+                <span>Download PDF (.pdf)</span>
               </button>
             </div>
           </div>

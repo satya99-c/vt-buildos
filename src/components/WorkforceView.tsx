@@ -183,7 +183,7 @@ export const WorkforceView: React.FC<WorkforceViewProps> = ({
 
         {/* Custom Start & End Date Inputs */}
         <div className="flex items-center gap-2">
-          <div className="flex items-center gap-1.5 bg-[#090D16] border border-white/10 rounded-2xl px-3 py-1.5">
+          <div className="flex items-center gap-1.5 bg-[#090D16] border border-white/10 hover:border-cyan-400/40 rounded-2xl px-3 py-1.5 transition">
             <span className="text-slate-500 text-[10px] uppercase font-mono">From:</span>
             <input
               type="date"
@@ -192,13 +192,13 @@ export const WorkforceView: React.FC<WorkforceViewProps> = ({
                 setStartDate(e.target.value);
                 setDateRangePreset('custom');
               }}
-              className="bg-transparent text-slate-200 font-mono focus:outline-none cursor-pointer"
+              className="bg-transparent text-white font-mono focus:outline-none cursor-pointer [color-scheme:dark]"
             />
           </div>
 
           <span className="text-slate-500 font-bold">→</span>
 
-          <div className="flex items-center gap-1.5 bg-[#090D16] border border-white/10 rounded-2xl px-3 py-1.5">
+          <div className="flex items-center gap-1.5 bg-[#090D16] border border-white/10 hover:border-cyan-400/40 rounded-2xl px-3 py-1.5 transition">
             <span className="text-slate-500 text-[10px] uppercase font-mono">To:</span>
             <input
               type="date"
@@ -207,7 +207,7 @@ export const WorkforceView: React.FC<WorkforceViewProps> = ({
                 setEndDate(e.target.value);
                 setDateRangePreset('custom');
               }}
-              className="bg-transparent text-slate-200 font-mono focus:outline-none cursor-pointer"
+              className="bg-transparent text-white font-mono focus:outline-none cursor-pointer [color-scheme:dark]"
             />
           </div>
 

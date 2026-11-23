@@ -420,7 +420,7 @@ export const SchedulingView: React.FC = () => {
                     type="date"
                     value={newStartDate}
                     onChange={(e) => setNewStartDate(e.target.value)}
-                    className="w-full bg-[#12192B] border border-slate-700 rounded-xl px-3.5 py-2 text-white font-mono focus:outline-none focus:border-cyan-400"
+                    className="w-full bg-[#12192B] border border-slate-700 rounded-xl px-3.5 py-2 text-white font-mono focus:outline-none focus:border-cyan-400 cursor-pointer [color-scheme:dark]"
                   />
                 </div>
                 <div>
@@ -429,7 +429,7 @@ export const SchedulingView: React.FC = () => {
                     type="date"
                     value={newEndDate}
                     onChange={(e) => setNewEndDate(e.target.value)}
-                    className="w-full bg-[#12192B] border border-slate-700 rounded-xl px-3.5 py-2 text-white font-mono focus:outline-none focus:border-cyan-400"
+                    className="w-full bg-[#12192B] border border-slate-700 rounded-xl px-3.5 py-2 text-white font-mono focus:outline-none focus:border-cyan-400 cursor-pointer [color-scheme:dark]"
                   />
                 </div>
               </div>

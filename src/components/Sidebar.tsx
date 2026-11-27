@@ -18,6 +18,8 @@ import {
   Building,
   Image as ImageIcon,
   MessageSquare,
+  Sun,
+  Moon,
 } from 'lucide-react';
 import { Organization, TenantId, UserRole } from '../types';
 
@@ -29,6 +31,8 @@ interface SidebarProps {
   onSelectRole: (role: UserRole) => void;
   activeTab: string;
   onSelectTab: (tab: string) => void;
+  theme?: 'dark' | 'light';
+  onToggleTheme?: () => void;
 }
 
 export const Sidebar: React.FC<SidebarProps> = ({
@@ -39,6 +43,8 @@ export const Sidebar: React.FC<SidebarProps> = ({
   onSelectRole,
   activeTab,
   onSelectTab,
+  theme = 'dark',
+  onToggleTheme,
 }) => {
   const roles: UserRole[] = [
     'Owner',
@@ -193,6 +199,28 @@ export const Sidebar: React.FC<SidebarProps> = ({
           </div>
         ))}
       </div>
+
+      {/* Theme Switcher in Sidebar */}
+      {onToggleTheme && (
+        <div className="px-3 py-2 border-t border-slate-800/80 bg-[#090D16]">
+          <button
+            onClick={onToggleTheme}
+            className="w-full flex items-center justify-between px-3 py-2 rounded-xl bg-[#0E1424] border border-white/5 hover:border-cyan-400/30 text-xs text-slate-300 hover:text-white transition cursor-pointer"
+          >
+            <span className="flex items-center gap-2">
+              {theme === 'light' ? (
+                <Sun className="w-3.5 h-3.5 text-amber-500" />
+              ) : (
+                <Moon className="w-3.5 h-3.5 text-cyan-400" />
+              )}
+              <span className="text-[11px] font-medium">{theme === 'light' ? 'Light Theme' : 'Dark Theme'}</span>
+            </span>
+            <span className="text-[10px] font-mono px-2 py-0.5 rounded-lg bg-[#141C2E] text-cyan-400 border border-white/5">
+              {theme === 'light' ? 'Switch Dark' : 'Switch Light'}
+            </span>
+          </button>
+        </div>
+      )}
 
       {/* Footer Info */}
       <div className="p-3 border-t border-slate-800/80 bg-[#0C111E] text-[11px] text-slate-400 flex items-center justify-between">

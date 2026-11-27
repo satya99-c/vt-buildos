@@ -37,6 +37,39 @@ export const App: React.FC = () => {
   const [isSupabaseModalOpen, setIsSupabaseModalOpen] = useState(false);
   const [activeActionModal, setActiveActionModal] = useState<string | null>(null);
 
+  // Theme state: defaults to dark theme as existing view, supports toggling to light theme
+  const [theme, setTheme] = useState<'dark' | 'light'>(() => {
+    try {
+      const saved = localStorage.getItem('vt_theme');
+      return saved === 'light' ? 'light' : 'dark';
+    } catch {
+      return 'dark';
+    }
+  });
+
+  const handleToggleTheme = () => {
+    setTheme((prev) => {
+      const next = prev === 'dark' ? 'light' : 'dark';
+      try {
+        localStorage.setItem('vt_theme', next);
+      } catch (err) {
+        // ignore
+      }
+      return next;
+    });
+  };
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+    if (theme === 'light') {
+      document.documentElement.classList.add('light-theme');
+      document.documentElement.classList.remove('dark-theme');
+    } else {
+      document.documentElement.classList.add('dark-theme');
+      document.documentElement.classList.remove('light-theme');
+    }
+  }, [theme]);
+
   const handleSelectQuickAction = (actionId: string) => {
     setActiveTab(actionId);
     setActiveActionModal(actionId);
@@ -91,7 +124,12 @@ export const App: React.FC = () => {
   };
 
   return (
-    <div className="flex h-screen bg-[#050811] text-slate-100 font-['Plus_Jakarta_Sans',sans-serif] overflow-hidden">
+    <div
+      data-theme={theme}
+      className={`flex h-screen ${
+        theme === 'light' ? 'light-theme bg-[#F4F6F9] text-slate-800' : 'dark-theme bg-[#050811] text-slate-100'
+      } font-['Plus_Jakarta_Sans',sans-serif] overflow-hidden`}
+    >
       {/* Left Sidebar */}
       <Sidebar
         currentOrg={currentOrg}
@@ -101,6 +139,8 @@ export const App: React.FC = () => {
         onSelectRole={handleSelectRole}
         activeTab={activeTab}
         onSelectTab={setActiveTab}
+        theme={theme}
+        onToggleTheme={handleToggleTheme}
       />
 
       {/* Main Content Area */}
@@ -110,6 +150,8 @@ export const App: React.FC = () => {
           currentOrg={currentOrg}
           user={currentUser}
           projects={projects}
+          theme={theme}
+          onToggleTheme={handleToggleTheme}
           onOpenQuickCreate={() => setIsQuickCreateOpen(true)}
           onOpenAiAssistant={() => setIsAiOpen(true)}
           onOpenSupabaseModal={() => setIsSupabaseModalOpen(true)}
@@ -118,7 +160,7 @@ export const App: React.FC = () => {
         />
 
         {/* View Content (Scrollable) */}
-        <main className="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8 bg-[#050811] relative">
+        <main className={`flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8 ${theme === 'light' ? 'bg-[#F4F6F9]' : 'bg-[#050811]'} relative`}>
           <div className="max-w-7xl mx-auto pb-12">
             {activeTab === 'dashboard' && (
               <DashboardView

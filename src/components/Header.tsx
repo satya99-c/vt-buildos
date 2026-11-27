@@ -15,6 +15,8 @@ import {
   ShieldAlert,
   ArrowRight,
   X,
+  Sun,
+  Moon,
 } from 'lucide-react';
 import { Organization, UserProfile, Project } from '../types';
 import { getSupabaseCredentials } from '../lib/supabase';
@@ -23,6 +25,8 @@ interface HeaderProps {
   currentOrg: Organization;
   user: UserProfile;
   projects?: Project[];
+  theme?: 'dark' | 'light';
+  onToggleTheme?: () => void;
   onOpenQuickCreate: () => void;
   onOpenAiAssistant: () => void;
   onOpenSupabaseModal: () => void;
@@ -34,6 +38,8 @@ export const Header: React.FC<HeaderProps> = ({
   currentOrg,
   user,
   projects = [],
+  theme = 'dark',
+  onToggleTheme,
   onOpenQuickCreate,
   onOpenAiAssistant,
   onOpenSupabaseModal,
@@ -242,6 +248,28 @@ export const Header: React.FC<HeaderProps> = ({
           <span className="w-1.5 h-1.5 rounded-full bg-current"></span>
           <span>{isConnected ? 'Database Live' : 'Connect DB'}</span>
         </button>
+
+        {/* Theme Mode Toggle (Dark / Light) */}
+        {onToggleTheme && (
+          <button
+            onClick={onToggleTheme}
+            title={theme === 'light' ? 'Switch to Dark Theme' : 'Switch to Light Theme'}
+            aria-label="Toggle Theme"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-2xl bg-[#0E1424] border border-white/10 text-xs font-semibold text-slate-300 hover:text-cyan-400 hover:border-cyan-500/40 transition cursor-pointer"
+          >
+            {theme === 'light' ? (
+              <>
+                <Moon className="w-3.5 h-3.5 text-cyan-600" />
+                <span className="hidden sm:inline text-[11px] font-mono">Dark</span>
+              </>
+            ) : (
+              <>
+                <Sun className="w-3.5 h-3.5 text-amber-400" />
+                <span className="hidden sm:inline text-[11px] font-mono">Light</span>
+              </>
+            )}
+          </button>
+        )}
 
         {/* AI Copilot Button */}
         <button

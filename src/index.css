@@ -16,7 +16,7 @@ input[type="number"] {
   -moz-appearance: textfield !important;
 }
 
-/* White calendar picker icon on dark theme across all date inputs */
+/* Calendar picker icon styling */
 input[type="date"] {
   color-scheme: dark;
 }
@@ -47,11 +47,11 @@ input[type="date"]::-webkit-calendar-picker-indicator:hover {
   background: #283248;
 }
 
-/* Premium Solid Matte Surfaces (RULE 1: NO GRADIENTS, RULE 2: NO DEFAULT BLUE, RULE 3: NO SHARP CORNERS, RULE 4: BESPOKE TYPOGRAPHY & TAGS) */
+/* Premium Solid Matte Surfaces */
 .solid-panel, .glass-panel {
   background-color: #0E131F;
   border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 1.25rem; /* Smooth rounded corners */
+  border-radius: 1.25rem;
 }
 
 .solid-panel-hover {
@@ -130,3 +130,293 @@ input[type="date"]::-webkit-calendar-picker-indicator:hover {
 .animate-beacon {
   animation: beaconFlash 1.2s ease-in-out infinite;
 }
+
+/* ==========================================================================
+   LIGHT THEME DESIGN SYSTEM (When data-theme="light" or .light-theme is active)
+   Clean, architectural, high-contrast light mode with crisp cards & borders.
+   ========================================================================== */
+
+[data-theme="light"],
+.light-theme {
+  color-scheme: light;
+}
+
+/* Page canvas and outer scroll areas */
+[data-theme="light"] .bg-\[\#050811\],
+[data-theme="light"] [class*="bg-[#050811]"],
+.light-theme .bg-\[\#050811\],
+.light-theme [class*="bg-[#050811]"] {
+  background-color: #F4F6F9 !important;
+}
+
+/* Header, Sidebar, and top-level navigation strips */
+[data-theme="light"] .bg-\[\#070B14\],
+[data-theme="light"] .bg-\[\#070D1E\],
+[data-theme="light"] .bg-\[\#090D16\],
+[data-theme="light"] .bg-\[\#091124\],
+[data-theme="light"] .bg-\[\#0A1124\],
+[data-theme="light"] .bg-\[\#0C111E\],
+[data-theme="light"] [class*="bg-[#070B14]"],
+[data-theme="light"] [class*="bg-[#090D16]"],
+[data-theme="light"] [class*="bg-[#0C111E]"],
+.light-theme .bg-\[\#070B14\],
+.light-theme .bg-\[\#070D1E\],
+.light-theme .bg-\[\#090D16\],
+.light-theme .bg-\[\#091124\],
+.light-theme .bg-\[\#0A1124\],
+.light-theme .bg-\[\#0C111E\],
+.light-theme [class*="bg-[#070B14]"],
+.light-theme [class*="bg-[#090D16]"],
+.light-theme [class*="bg-[#0C111E]"] {
+  background-color: #FFFFFF !important;
+}
+
+/* Cards, Modals, Panels, and Drawers */
+[data-theme="light"] .bg-\[\#0E1424\],
+[data-theme="light"] .bg-\[\#0E1526\],
+[data-theme="light"] .bg-\[\#0A0E1A\],
+[data-theme="light"] [class*="bg-[#0E1424]"],
+[data-theme="light"] [class*="bg-[#0E1526]"],
+[data-theme="light"] [class*="bg-[#0A0E1A]"],
+.light-theme .bg-\[\#0E1424\],
+.light-theme .bg-\[\#0E1526\],
+.light-theme .bg-\[\#0A0E1A\],
+.light-theme [class*="bg-[#0E1424]"],
+.light-theme [class*="bg-[#0E1526]"],
+.light-theme [class*="bg-[#0A0E1A]"] {
+  background-color: #FFFFFF !important;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.04);
+}
+
+/* Sub-panels, stat tiles, table rows, and secondary boxes */
+[data-theme="light"] .bg-\[\#111726\],
+[data-theme="light"] .bg-\[\#12192B\],
+[data-theme="light"] .bg-\[\#131c33\],
+[data-theme="light"] .bg-\[\#141C2E\],
+[data-theme="light"] .bg-\[\#141C30\],
+[data-theme="light"] .bg-\[\#141d30\],
+[data-theme="light"] .bg-\[\#151D33\],
+[data-theme="light"] .bg-\[\#151f36\],
+[data-theme="light"] .bg-\[\#162035\],
+[data-theme="light"] .bg-\[\#172138\],
+[data-theme="light"] .bg-\[\#18233d\],
+[data-theme="light"] .bg-\[\#1a253e\],
+[data-theme="light"] .bg-\[\#1a253d\],
+[data-theme="light"] [class*="bg-[#111726]"],
+[data-theme="light"] [class*="bg-[#12192B]"],
+[data-theme="light"] [class*="bg-[#141C2E]"],
+[data-theme="light"] [class*="bg-[#141C30]"],
+[data-theme="light"] [class*="bg-[#1a253e]"],
+.light-theme .bg-\[\#111726\],
+.light-theme .bg-\[\#12192B\],
+.light-theme .bg-\[\#131c33\],
+.light-theme .bg-\[\#141C2E\],
+.light-theme .bg-\[\#141C30\],
+.light-theme .bg-\[\#141d30\],
+.light-theme .bg-\[\#151D33\],
+.light-theme .bg-\[\#151f36\],
+.light-theme .bg-\[\#162035\],
+.light-theme .bg-\[\#172138\],
+.light-theme .bg-\[\#18233d\],
+.light-theme .bg-\[\#1a253e\],
+.light-theme .bg-\[\#1a253d\],
+.light-theme [class*="bg-[#111726]"],
+.light-theme [class*="bg-[#12192B]"],
+.light-theme [class*="bg-[#141C2E]"],
+.light-theme [class*="bg-[#141C30]"],
+.light-theme [class*="bg-[#1a253e]"] {
+  background-color: #F8FAFC !important;
+}
+
+/* Light Theme Badges with soft pastel backdrops */
+[data-theme="light"] .bg-\[\#102422\],
+.light-theme .bg-\[\#102422\] {
+  background-color: #ECFDF5 !important;
+}
+[data-theme="light"] .bg-\[\#261E14\],
+.light-theme .bg-\[\#261E14\] {
+  background-color: #FFFBEB !important;
+}
+[data-theme="light"] .bg-\[\#0E251E\],
+.light-theme .bg-\[\#0E251E\] {
+  background-color: #F0FDF4 !important;
+}
+[data-theme="light"] .bg-\[\#2E1418\],
+.light-theme .bg-\[\#2E1418\] {
+  background-color: #FFF1F2 !important;
+}
+
+[data-theme="light"] .bg-slate-900,
+[data-theme="light"] .bg-slate-950,
+.light-theme .bg-slate-900,
+.light-theme .bg-slate-950 {
+  background-color: #F1F5F9 !important;
+}
+
+[data-theme="light"] .bg-slate-800,
+.light-theme .bg-slate-800 {
+  background-color: #E2E8F0 !important;
+}
+
+/* Text Hierarchy in Light Theme */
+[data-theme="light"] .text-white,
+.light-theme .text-white {
+  color: #0F172A !important;
+}
+
+[data-theme="light"] .text-slate-100,
+[data-theme="light"] .text-slate-200,
+.light-theme .text-slate-100,
+.light-theme .text-slate-200 {
+  color: #1E293B !important;
+}
+
+[data-theme="light"] .text-slate-300,
+.light-theme .text-slate-300 {
+  color: #334155 !important;
+}
+
+[data-theme="light"] .text-slate-400,
+[data-theme="light"] .text-slate-500,
+.light-theme .text-slate-400,
+.light-theme .text-slate-500 {
+  color: #64748B !important;
+}
+
+/* Accessible High-Contrast Accents for Light Mode */
+[data-theme="light"] .text-cyan-400,
+[data-theme="light"] .text-cyan-300,
+.light-theme .text-cyan-400,
+.light-theme .text-cyan-300 {
+  color: #0284C7 !important;
+}
+
+[data-theme="light"] .text-emerald-400,
+.light-theme .text-emerald-400 {
+  color: #059669 !important;
+}
+
+[data-theme="light"] .text-amber-400,
+.light-theme .text-amber-400 {
+  color: #D97706 !important;
+}
+
+[data-theme="light"] .text-rose-400,
+.light-theme .text-rose-400 {
+  color: #E11D48 !important;
+}
+
+/* Light Mode Borders */
+[data-theme="light"] .border-slate-800,
+[data-theme="light"] .border-slate-700,
+[data-theme="light"] [class*="border-slate-800"],
+[data-theme="light"] [class*="border-slate-700"],
+[data-theme="light"] [class*="border-white/5"],
+[data-theme="light"] [class*="border-white/10"],
+[data-theme="light"] [class*="border-white/15"],
+[data-theme="light"] [class*="border-white/20"],
+.light-theme .border-slate-800,
+.light-theme .border-slate-700,
+.light-theme [class*="border-slate-800"],
+.light-theme [class*="border-slate-700"],
+.light-theme [class*="border-white/5"],
+.light-theme [class*="border-white/10"],
+.light-theme [class*="border-white/15"],
+.light-theme [class*="border-white/20"] {
+  border-color: #E2E8F0 !important;
+}
+
+[data-theme="light"] [class*="border-cyan-400/"],
+.light-theme [class*="border-cyan-400/"] {
+  border-color: rgba(2, 132, 199, 0.3) !important;
+}
+
+/* Preserve dark text on vibrant Cyan CTA Buttons */
+[data-theme="light"] .bg-cyan-400,
+[data-theme="light"] [class*="bg-cyan-400"],
+.light-theme .bg-cyan-400,
+.light-theme [class*="bg-cyan-400"] {
+  color: #020617 !important;
+}
+
+[data-theme="light"] .bg-cyan-400 *,
+[data-theme="light"] [class*="bg-cyan-400"] *,
+.light-theme .bg-cyan-400 *,
+.light-theme [class*="bg-cyan-400"] * {
+  color: #020617 !important;
+}
+
+/* Preserve light text inside solid dark buttons & badges */
+[data-theme="light"] .bg-cyan-500 .text-white,
+[data-theme="light"] .bg-emerald-500 .text-white,
+[data-theme="light"] .bg-rose-500 .text-white,
+[data-theme="light"] .bg-blue-600 .text-white,
+[data-theme="light"] .bg-indigo-600 .text-white,
+.light-theme .bg-cyan-500 .text-white,
+.light-theme .bg-emerald-500 .text-white,
+.light-theme .bg-rose-500 .text-white,
+.light-theme .bg-blue-600 .text-white,
+.light-theme .bg-indigo-600 .text-white {
+  color: #FFFFFF !important;
+}
+
+/* Form inputs in light mode */
+[data-theme="light"] input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]):not([type="button"]),
+[data-theme="light"] select,
+[data-theme="light"] textarea,
+.light-theme input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]):not([type="button"]),
+.light-theme select,
+.light-theme textarea {
+  background-color: #FFFFFF !important;
+  color: #0F172A !important;
+  border-color: #CBD5E1 !important;
+}
+
+[data-theme="light"] input::placeholder,
+[data-theme="light"] textarea::placeholder,
+.light-theme input::placeholder,
+.light-theme textarea::placeholder {
+  color: #94A3B8 !important;
+}
+
+/* Date picker calendar icon in light mode */
+[data-theme="light"] input[type="date"],
+.light-theme input[type="date"] {
+  color-scheme: light !important;
+}
+[data-theme="light"] input[type="date"]::-webkit-calendar-picker-indicator,
+.light-theme input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: none !important;
+  opacity: 0.8;
+}
+
+/* Light scrollbar */
+[data-theme="light"] ::-webkit-scrollbar-track,
+.light-theme ::-webkit-scrollbar-track {
+  background: #F1F5F9;
+}
+[data-theme="light"] ::-webkit-scrollbar-thumb,
+.light-theme ::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+}
+[data-theme="light"] ::-webkit-scrollbar-thumb:hover,
+.light-theme ::-webkit-scrollbar-thumb:hover {
+  background: #94A3B8;
+}
+
+/* Light mode panels */
+[data-theme="light"] .solid-panel,
+[data-theme="light"] .glass-panel,
+.light-theme .solid-panel,
+.light-theme .glass-panel {
+  background-color: #FFFFFF !important;
+  border-color: #E2E8F0 !important;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="light"] .solid-panel-hover:hover,
+.light-theme .solid-panel-hover:hover {
+  background-color: #F8FAFC !important;
+  border-color: #0284C7 !important;
+}
+

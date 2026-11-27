@@ -22,8 +22,6 @@
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.119.2",
-    "@types/three": "^0.187.0",
-    "jspdf": "^4.2.1",
-    "three": "^0.187.0"
+    "jspdf": "^4.2.1"
   }
 }

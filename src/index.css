@@ -37,19 +37,19 @@ input[type="date"]::-webkit-calendar-picker-indicator:hover {
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #090D16;
+  background: #000000;
 }
 ::-webkit-scrollbar-thumb {
-  background: #1C2333;
+  background: #242424;
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #283248;
+  background: #383838;
 }
 
 /* Premium Solid Matte Surfaces */
 .solid-panel, .glass-panel {
-  background-color: #0E131F;
+  background-color: #0F0F0F;
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 1.25rem;
 }
@@ -58,7 +58,7 @@ input[type="date"]::-webkit-calendar-picker-indicator:hover {
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .solid-panel-hover:hover {
-  background-color: #131A2B;
+  background-color: #171717;
   border-color: rgba(0, 229, 255, 0.35);
   transform: translateY(-1px);
 }
@@ -129,6 +129,131 @@ input[type="date"]::-webkit-calendar-picker-indicator:hover {
 
 .animate-beacon {
   animation: beaconFlash 1.2s ease-in-out infinite;
+}
+
+/* ==========================================================================
+   TRUE BLACK DARK THEME SYSTEM (When data-theme="dark" or .dark-theme is active)
+   Neutral pure black & charcoal matte surfaces without navy-blue tint.
+   ========================================================================== */
+
+[data-theme="dark"],
+.dark-theme {
+  color-scheme: dark;
+  background-color: #000000;
+}
+
+/* Page canvas & outer scroll areas */
+[data-theme="dark"] .bg-\[\#050811\],
+[data-theme="dark"] [class*="bg-[#050811]"],
+.dark-theme .bg-\[\#050811\],
+.dark-theme [class*="bg-[#050811]"] {
+  background-color: #000000 !important;
+}
+
+/* Header, Sidebar, and top-level strips */
+[data-theme="dark"] .bg-\[\#070B14\],
+[data-theme="dark"] .bg-\[\#070D1E\],
+[data-theme="dark"] .bg-\[\#090D16\],
+[data-theme="dark"] .bg-\[\#091124\],
+[data-theme="dark"] .bg-\[\#0A1124\],
+[data-theme="dark"] .bg-\[\#0C111E\],
+[data-theme="dark"] [class*="bg-[#070B14]"],
+[data-theme="dark"] [class*="bg-[#090D16]"],
+[data-theme="dark"] [class*="bg-[#0C111E]"],
+.dark-theme .bg-\[\#070B14\],
+.dark-theme .bg-\[\#070D1E\],
+.dark-theme .bg-\[\#090D16\],
+.dark-theme .bg-\[\#091124\],
+.dark-theme .bg-\[\#0A1124\],
+.dark-theme .bg-\[\#0C111E\],
+.dark-theme [class*="bg-[#070B14]"],
+.dark-theme [class*="bg-[#090D16]"],
+.dark-theme [class*="bg-[#0C111E]"] {
+  background-color: #080808 !important;
+}
+
+/* Cards, Modals, Panels, and Drawers */
+[data-theme="dark"] .bg-\[\#0E1424\],
+[data-theme="dark"] .bg-\[\#0E1526\],
+[data-theme="dark"] .bg-\[\#0A0E1A\],
+[data-theme="dark"] [class*="bg-[#0E1424]"],
+[data-theme="dark"] [class*="bg-[#0E1526]"],
+[data-theme="dark"] [class*="bg-[#0A0E1A]"],
+.dark-theme .bg-\[\#0E1424\],
+.dark-theme .bg-\[\#0E1526\],
+.dark-theme .bg-\[\#0A0E1A\],
+.dark-theme [class*="bg-[#0E1424]"],
+.dark-theme [class*="bg-[#0E1526]"],
+.dark-theme [class*="bg-[#0A0E1A]"] {
+  background-color: #0F0F0F !important;
+}
+
+/* Sub-panels, stat tiles, inputs, and secondary boxes */
+[data-theme="dark"] .bg-\[\#111726\],
+[data-theme="dark"] .bg-\[\#12192B\],
+[data-theme="dark"] .bg-\[\#131c33\],
+[data-theme="dark"] .bg-\[\#141C2E\],
+[data-theme="dark"] .bg-\[\#141C30\],
+[data-theme="dark"] .bg-\[\#141d30\],
+[data-theme="dark"] .bg-\[\#151D33\],
+[data-theme="dark"] .bg-\[\#151f36\],
+[data-theme="dark"] .bg-\[\#162035\],
+[data-theme="dark"] .bg-\[\#172138\],
+[data-theme="dark"] .bg-\[\#18233d\],
+[data-theme="dark"] .bg-\[\#1a253e\],
+[data-theme="dark"] .bg-\[\#1a253d\],
+[data-theme="dark"] [class*="bg-[#111726]"],
+[data-theme="dark"] [class*="bg-[#12192B]"],
+[data-theme="dark"] [class*="bg-[#141C2E]"],
+[data-theme="dark"] [class*="bg-[#141C30]"],
+[data-theme="dark"] [class*="bg-[#1a253e]"],
+.dark-theme .bg-\[\#111726\],
+.dark-theme .bg-\[\#12192B\],
+.dark-theme .bg-\[\#131c33\],
+.dark-theme .bg-\[\#141C2E\],
+.dark-theme .bg-\[\#141C30\],
+.dark-theme .bg-\[\#141d30\],
+.dark-theme .bg-\[\#151D33\],
+.dark-theme .bg-\[\#151f36\],
+.dark-theme .bg-\[\#162035\],
+.dark-theme .bg-\[\#172138\],
+.dark-theme .bg-\[\#18233d\],
+.dark-theme .bg-\[\#1a253e\],
+.dark-theme .bg-\[\#1a253d\],
+.dark-theme [class*="bg-[#111726]"],
+.dark-theme [class*="bg-[#12192B]"],
+.dark-theme [class*="bg-[#141C2E]"],
+.dark-theme [class*="bg-[#141C30]"],
+.dark-theme [class*="bg-[#1a253e]"] {
+  background-color: #161616 !important;
+}
+
+/* Neutralize slate backgrounds in dark mode (excluding cyan CTA text/buttons) */
+[data-theme="dark"] .bg-slate-950:not(.bg-cyan-400),
+.dark-theme .bg-slate-950:not(.bg-cyan-400) {
+  background-color: #050505 !important;
+}
+[data-theme="dark"] .bg-slate-900,
+.dark-theme .bg-slate-900 {
+  background-color: #121212 !important;
+}
+[data-theme="dark"] .bg-slate-800,
+.dark-theme .bg-slate-800 {
+  background-color: #1C1C1C !important;
+}
+
+/* Neutral borders in dark mode */
+[data-theme="dark"] .border-slate-800,
+[data-theme="dark"] [class*="border-slate-800"],
+.dark-theme .border-slate-800,
+.dark-theme [class*="border-slate-800"] {
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}
+[data-theme="dark"] .border-slate-700,
+[data-theme="dark"] [class*="border-slate-700"],
+.dark-theme .border-slate-700,
+.dark-theme [class*="border-slate-700"] {
+  border-color: rgba(255, 255, 255, 0.12) !important;
 }
 
 /* ==========================================================================

@@ -420,3 +420,34 @@ input[type="date"]::-webkit-calendar-picker-indicator:hover {
   border-color: #0284C7 !important;
 }
 
+/* Keep cinematic night construction splash screen in dark theme */
+[data-theme="light"] .splash-cinematic,
+[data-theme="light"] .splash-cinematic.bg-\[\#050811\] {
+  background-color: #050811 !important;
+  color: #F1F5F9 !important;
+}
+[data-theme="light"] .splash-cinematic .bg-\[\#090D16\],
+[data-theme="light"] .splash-cinematic [class*="bg-[#090D16]"] {
+  background-color: rgba(9, 13, 22, 0.9) !important;
+}
+[data-theme="light"] .splash-cinematic .bg-\[\#0E1424\] {
+  background-color: #0E1424 !important;
+  box-shadow: none !important;
+}
+[data-theme="light"] .splash-cinematic .text-white {
+  color: #FFFFFF !important;
+}
+[data-theme="light"] .splash-cinematic .text-slate-300 {
+  color: #CBD5E1 !important;
+}
+[data-theme="light"] .splash-cinematic .text-slate-400 {
+  color: #94A3B8 !important;
+}
+[data-theme="light"] .splash-cinematic .text-cyan-300,
+[data-theme="light"] .splash-cinematic .text-cyan-400 {
+  color: #22D3EE !important;
+}
+[data-theme="light"] .splash-cinematic [class*="border-white/"] {
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}
+

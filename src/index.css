@@ -257,24 +257,41 @@ input[type="date"]::-webkit-calendar-picker-indicator:hover {
 }
 
 /* ==========================================================================
-   LIGHT THEME DESIGN SYSTEM (When data-theme="light" or .light-theme is active)
-   Clean, architectural, high-contrast light mode with crisp cards & borders.
+   ARCHITECTURAL PAPER & PINE LIGHT THEME (Briklay-inspired Design System)
+   Warm off-white paper (#fcfaf6), cream sand (#faf8f4), deep forest pine (#16302b),
+   hairline greige borders (#e6e1d9), Fraunces editorial serif headings & Inter UI.
    ========================================================================== */
 
 [data-theme="light"],
 .light-theme {
   color-scheme: light;
+  font-family: 'Inter', system-ui, sans-serif;
+  color: #16302b;
+  background-color: #fcfaf6;
 }
 
-/* Page canvas and outer scroll areas */
+/* Editorial Serif Headings in Architectural Theme */
+[data-theme="light"] h1,
+[data-theme="light"] h2,
+[data-theme="light"] h3,
+.light-theme h1,
+.light-theme h2,
+.light-theme h3 {
+  font-family: 'Fraunces', Georgia, serif !important;
+  font-variation-settings: "SOFT" 60, "WONK" 0;
+  letter-spacing: -0.025em;
+  color: #16302b !important;
+}
+
+/* Page canvas and outer scroll areas -> Warm Architectural Paper (#fcfaf6) */
 [data-theme="light"] .bg-\[\#050811\],
 [data-theme="light"] [class*="bg-[#050811]"],
 .light-theme .bg-\[\#050811\],
 .light-theme [class*="bg-[#050811]"] {
-  background-color: #F4F6F9 !important;
+  background-color: #fcfaf6 !important;
 }
 
-/* Header, Sidebar, and top-level navigation strips */
+/* Header, Sidebar, and navigation strips -> Warm Cream Sand (#faf8f4) */
 [data-theme="light"] .bg-\[\#070B14\],
 [data-theme="light"] .bg-\[\#070D1E\],
 [data-theme="light"] .bg-\[\#090D16\],
@@ -293,10 +310,10 @@ input[type="date"]::-webkit-calendar-picker-indicator:hover {
 .light-theme [class*="bg-[#070B14]"],
 .light-theme [class*="bg-[#090D16]"],
 .light-theme [class*="bg-[#0C111E]"] {
-  background-color: #FFFFFF !important;
+  background-color: #faf8f4 !important;
 }
 
-/* Cards, Modals, Panels, and Drawers */
+/* Cards, Modals, Panels, and Drawers -> Crisp White with Soft Pine Shadow */
 [data-theme="light"] .bg-\[\#0E1424\],
 [data-theme="light"] .bg-\[\#0E1526\],
 [data-theme="light"] .bg-\[\#0A0E1A\],
@@ -309,11 +326,11 @@ input[type="date"]::-webkit-calendar-picker-indicator:hover {
 .light-theme [class*="bg-[#0E1424]"],
 .light-theme [class*="bg-[#0E1526]"],
 .light-theme [class*="bg-[#0A0E1A]"] {
-  background-color: #FFFFFF !important;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.04);
+  background-color: #ffffff !important;
+  box-shadow: 0 20px 40px -28px rgba(22, 48, 43, 0.14);
 }
 
-/* Sub-panels, stat tiles, table rows, and secondary boxes */
+/* Sub-panels, stat tiles, table rows, and secondary boxes -> Warm Limestone (#f4f2ee) */
 [data-theme="light"] .bg-\[\#111726\],
 [data-theme="light"] .bg-\[\#12192B\],
 [data-theme="light"] .bg-\[\#131c33\],
@@ -350,88 +367,92 @@ input[type="date"]::-webkit-calendar-picker-indicator:hover {
 .light-theme [class*="bg-[#141C2E]"],
 .light-theme [class*="bg-[#141C30]"],
 .light-theme [class*="bg-[#1a253e]"] {
-  background-color: #F8FAFC !important;
+  background-color: #f4f2ee !important;
 }
 
-/* Light Theme Badges with soft pastel backdrops */
+/* Status & Connection Badges in Architectural Palette */
 [data-theme="light"] .bg-\[\#102422\],
-.light-theme .bg-\[\#102422\] {
-  background-color: #ECFDF5 !important;
+[data-theme="light"] .bg-\[\#0E251E\],
+.light-theme .bg-\[\#102422\],
+.light-theme .bg-\[\#0E251E\] {
+  background-color: #eaf1ed !important;
 }
 [data-theme="light"] .bg-\[\#261E14\],
 .light-theme .bg-\[\#261E14\] {
-  background-color: #FFFBEB !important;
-}
-[data-theme="light"] .bg-\[\#0E251E\],
-.light-theme .bg-\[\#0E251E\] {
-  background-color: #F0FDF4 !important;
+  background-color: #faf3e6 !important;
 }
 [data-theme="light"] .bg-\[\#2E1418\],
 .light-theme .bg-\[\#2E1418\] {
-  background-color: #FFF1F2 !important;
+  background-color: #fdf2f2 !important;
 }
 
 [data-theme="light"] .bg-slate-900,
 [data-theme="light"] .bg-slate-950,
 .light-theme .bg-slate-900,
 .light-theme .bg-slate-950 {
-  background-color: #F1F5F9 !important;
+  background-color: #f4f2ee !important;
 }
 
 [data-theme="light"] .bg-slate-800,
 .light-theme .bg-slate-800 {
-  background-color: #E2E8F0 !important;
+  background-color: #ebe8e2 !important;
 }
 
-/* Text Hierarchy in Light Theme */
+/* Botanical Pine Ink Text Hierarchy */
 [data-theme="light"] .text-white,
 .light-theme .text-white {
-  color: #0F172A !important;
+  color: #16302b !important;
 }
 
 [data-theme="light"] .text-slate-100,
 [data-theme="light"] .text-slate-200,
 .light-theme .text-slate-100,
 .light-theme .text-slate-200 {
-  color: #1E293B !important;
+  color: #16302b !important;
 }
 
 [data-theme="light"] .text-slate-300,
 .light-theme .text-slate-300 {
-  color: #334155 !important;
+  color: rgba(22, 48, 43, 0.82) !important;
 }
 
 [data-theme="light"] .text-slate-400,
 [data-theme="light"] .text-slate-500,
 .light-theme .text-slate-400,
 .light-theme .text-slate-500 {
-  color: #64748B !important;
+  color: rgba(22, 48, 43, 0.56) !important;
 }
 
-/* Accessible High-Contrast Accents for Light Mode */
+/* Replace Neon Cyan Accents with Deep Forest Pine & Muted Sage */
 [data-theme="light"] .text-cyan-400,
 [data-theme="light"] .text-cyan-300,
 .light-theme .text-cyan-400,
 .light-theme .text-cyan-300 {
-  color: #0284C7 !important;
+  color: #16302b !important;
 }
 
 [data-theme="light"] .text-emerald-400,
-.light-theme .text-emerald-400 {
-  color: #059669 !important;
+[data-theme="light"] .text-emerald-300,
+.light-theme .text-emerald-400,
+.light-theme .text-emerald-300 {
+  color: #2f7a5b !important;
 }
 
 [data-theme="light"] .text-amber-400,
-.light-theme .text-amber-400 {
-  color: #D97706 !important;
+[data-theme="light"] .text-amber-300,
+.light-theme .text-amber-400,
+.light-theme .text-amber-300 {
+  color: #9a5b13 !important;
 }
 
 [data-theme="light"] .text-rose-400,
-.light-theme .text-rose-400 {
-  color: #E11D48 !important;
+.light-theme .text-rose-300,
+.light-theme .text-rose-400,
+.light-theme .text-rose-300 {
+  color: #b42318 !important;
 }
 
-/* Light Mode Borders */
+/* Warm Greige Hairline Borders (#e6e1d9) */
 [data-theme="light"] .border-slate-800,
 [data-theme="light"] .border-slate-700,
 [data-theme="light"] [class*="border-slate-800"],
@@ -448,60 +469,72 @@ input[type="date"]::-webkit-calendar-picker-indicator:hover {
 .light-theme [class*="border-white/10"],
 .light-theme [class*="border-white/15"],
 .light-theme [class*="border-white/20"] {
-  border-color: #E2E8F0 !important;
+  border-color: #e6e1d9 !important;
 }
 
 [data-theme="light"] [class*="border-cyan-400/"],
-.light-theme [class*="border-cyan-400/"] {
-  border-color: rgba(2, 132, 199, 0.3) !important;
+[data-theme="light"] [class*="border-cyan-500/"],
+.light-theme [class*="border-cyan-400/"],
+.light-theme [class*="border-cyan-500/"] {
+  border-color: rgba(22, 48, 43, 0.22) !important;
 }
 
-/* Preserve dark text on vibrant Cyan CTA Buttons */
+/* Primary CTA Buttons & Active Sidebar Tabs -> Deep Forest Pine (#16302b) with Cream Text */
 [data-theme="light"] .bg-cyan-400,
 [data-theme="light"] [class*="bg-cyan-400"],
+[data-theme="light"] .bg-cyan-500,
 .light-theme .bg-cyan-400,
-.light-theme [class*="bg-cyan-400"] {
-  color: #020617 !important;
+.light-theme [class*="bg-cyan-400"],
+.light-theme .bg-cyan-500 {
+  background-color: #16302b !important;
+  color: #fcfaf6 !important;
+}
+
+[data-theme="light"] .bg-cyan-400:hover,
+[data-theme="light"] [class*="bg-cyan-400"]:hover,
+.light-theme .bg-cyan-400:hover,
+.light-theme [class*="bg-cyan-400"]:hover {
+  background-color: #1f423b !important;
 }
 
 [data-theme="light"] .bg-cyan-400 *,
 [data-theme="light"] [class*="bg-cyan-400"] *,
+[data-theme="light"] .bg-cyan-500 *,
 .light-theme .bg-cyan-400 *,
-.light-theme [class*="bg-cyan-400"] * {
-  color: #020617 !important;
+.light-theme [class*="bg-cyan-400"] *,
+.light-theme .bg-cyan-500 * {
+  color: #fcfaf6 !important;
 }
 
-/* Preserve light text inside solid dark buttons & badges */
-[data-theme="light"] .bg-cyan-500 .text-white,
+/* Preserve light text inside solid dark status buttons & badges */
 [data-theme="light"] .bg-emerald-500 .text-white,
 [data-theme="light"] .bg-rose-500 .text-white,
 [data-theme="light"] .bg-blue-600 .text-white,
 [data-theme="light"] .bg-indigo-600 .text-white,
-.light-theme .bg-cyan-500 .text-white,
 .light-theme .bg-emerald-500 .text-white,
 .light-theme .bg-rose-500 .text-white,
 .light-theme .bg-blue-600 .text-white,
 .light-theme .bg-indigo-600 .text-white {
-  color: #FFFFFF !important;
+  color: #ffffff !important;
 }
 
-/* Form inputs in light mode */
+/* Form inputs in Architectural Paper Theme */
 [data-theme="light"] input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]):not([type="button"]),
 [data-theme="light"] select,
 [data-theme="light"] textarea,
 .light-theme input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]):not([type="button"]),
 .light-theme select,
 .light-theme textarea {
-  background-color: #FFFFFF !important;
-  color: #0F172A !important;
-  border-color: #CBD5E1 !important;
+  background-color: #fcfaf6 !important;
+  color: #16302b !important;
+  border-color: #e6e1d9 !important;
 }
 
 [data-theme="light"] input::placeholder,
 [data-theme="light"] textarea::placeholder,
 .light-theme input::placeholder,
 .light-theme textarea::placeholder {
-  color: #94A3B8 !important;
+  color: rgba(22, 48, 43, 0.45) !important;
 }
 
 /* Date picker calendar icon in light mode */
@@ -512,21 +545,21 @@ input[type="date"]::-webkit-calendar-picker-indicator:hover {
 [data-theme="light"] input[type="date"]::-webkit-calendar-picker-indicator,
 .light-theme input[type="date"]::-webkit-calendar-picker-indicator {
   filter: none !important;
-  opacity: 0.8;
+  opacity: 0.75;
 }
 
-/* Light scrollbar */
+/* Warm Sand Scrollbar */
 [data-theme="light"] ::-webkit-scrollbar-track,
 .light-theme ::-webkit-scrollbar-track {
-  background: #F1F5F9;
+  background: #faf8f4;
 }
 [data-theme="light"] ::-webkit-scrollbar-thumb,
 .light-theme ::-webkit-scrollbar-thumb {
-  background: #CBD5E1;
+  background: #dcd6cc;
 }
 [data-theme="light"] ::-webkit-scrollbar-thumb:hover,
 .light-theme ::-webkit-scrollbar-thumb:hover {
-  background: #94A3B8;
+  background: #c5bdb0;
 }
 
 /* Light mode panels */
@@ -534,15 +567,15 @@ input[type="date"]::-webkit-calendar-picker-indicator:hover {
 [data-theme="light"] .glass-panel,
 .light-theme .solid-panel,
 .light-theme .glass-panel {
-  background-color: #FFFFFF !important;
-  border-color: #E2E8F0 !important;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+  background-color: #ffffff !important;
+  border-color: #e6e1d9 !important;
+  box-shadow: 0 20px 40px -28px rgba(22, 48, 43, 0.14);
 }
 
 [data-theme="light"] .solid-panel-hover:hover,
 .light-theme .solid-panel-hover:hover {
-  background-color: #F8FAFC !important;
-  border-color: #0284C7 !important;
+  background-color: #faf8f4 !important;
+  border-color: #16302b !important;
 }
 
 /* Keep cinematic night construction splash screen in dark theme */

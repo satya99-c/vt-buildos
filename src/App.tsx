@@ -21,15 +21,12 @@ import { AICopilotDrawer } from './components/AICopilotDrawer';
 import { QuickCreateModal } from './components/QuickCreateModal';
 import { SupabaseModal } from './components/SupabaseModal';
 import { ConstructionSplashScreen } from './components/ConstructionSplashScreen';
-import { VTWebsiteView } from './components/VTWebsiteView';
 import { organizations, initialProjects, demoProjects } from './data/mockData';
 import { Organization, TenantId, UserProfile, UserRole, Project } from './types';
 import { dbFetchProjects } from './lib/supabase';
 
 export const App: React.FC = () => {
-  // Landing mode: 'website' (Briklay-inspired editorial residential site) or 'erp' (BuildOS Operations)
-  const [viewMode, setViewMode] = useState<'website' | 'erp'>('website');
-  // Splash screen starts false so user lands directly into the website
+  // Splash screen starts false so user lands directly into BuildOS
   const [showSplash, setShowSplash] = useState(false);
   const [currentOrgId, setCurrentOrgId] = useState<TenantId>('vt-dev');
   const [currentRole, setCurrentRole] = useState<UserRole>('Owner');
@@ -40,13 +37,13 @@ export const App: React.FC = () => {
   const [isSupabaseModalOpen, setIsSupabaseModalOpen] = useState(false);
   const [activeActionModal, setActiveActionModal] = useState<string | null>(null);
 
-  // Theme state: defaults to dark theme as existing view, supports toggling to light theme
+  // Theme state: defaults to 'light' (Briklay-inspired Architectural Paper & Pine theme), toggleable to True Black 'dark'
   const [theme, setTheme] = useState<'dark' | 'light'>(() => {
     try {
-      const saved = localStorage.getItem('vt_theme');
-      return saved === 'light' ? 'light' : 'dark';
+      const saved = localStorage.getItem('vt_theme_v2');
+      return saved === 'dark' ? 'dark' : 'light';
     } catch {
-      return 'dark';
+      return 'light';
     }
   });
 
@@ -54,7 +51,7 @@ export const App: React.FC = () => {
     setTheme((prev) => {
       const next = prev === 'dark' ? 'light' : 'dark';
       try {
-        localStorage.setItem('vt_theme', next);
+        localStorage.setItem('vt_theme_v2', next);
       } catch (err) {
         // ignore
       }
@@ -126,26 +123,12 @@ export const App: React.FC = () => {
     setProjects([p, ...projects]);
   };
 
-  if (viewMode === 'website') {
-    return (
-      <>
-        <VTWebsiteView
-          onEnterErp={() => setViewMode('erp')}
-          onOpenSiteIntro={() => setShowSplash(true)}
-        />
-        {showSplash && (
-          <ConstructionSplashScreen onEnter={() => setShowSplash(false)} />
-        )}
-      </>
-    );
-  }
-
   return (
     <div
       data-theme={theme}
       className={`flex h-screen ${
-        theme === 'light' ? 'light-theme bg-[#F4F6F9] text-slate-800' : 'dark-theme bg-[#050811] text-slate-100'
-      } font-['Plus_Jakarta_Sans',sans-serif] overflow-hidden`}
+        theme === 'light' ? 'light-theme bg-[#fcfaf6] text-[#16302b]' : 'dark-theme bg-[#000000] text-slate-100'
+      } overflow-hidden`}
     >
       {/* Left Sidebar */}
       <Sidebar
@@ -173,12 +156,11 @@ export const App: React.FC = () => {
           onOpenAiAssistant={() => setIsAiOpen(true)}
           onOpenSupabaseModal={() => setIsSupabaseModalOpen(true)}
           onReplaySplash={() => setShowSplash(true)}
-          onOpenWebsite={() => setViewMode('website')}
           onNavigateTab={(tab) => setActiveTab(tab)}
         />
 
         {/* View Content (Scrollable) */}
-        <main className={`flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8 ${theme === 'light' ? 'bg-[#F4F6F9]' : 'bg-[#050811]'} relative`}>
+        <main className={`flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8 ${theme === 'light' ? 'bg-[#fcfaf6]' : 'bg-[#000000]'} relative`}>
           <div className="max-w-7xl mx-auto pb-12">
             {activeTab === 'dashboard' && (
               <DashboardView

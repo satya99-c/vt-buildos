@@ -17,6 +17,7 @@ import {
   X,
   Sun,
   Moon,
+  Globe,
 } from 'lucide-react';
 import { Organization, UserProfile, Project } from '../types';
 import { getSupabaseCredentials } from '../lib/supabase';
@@ -31,6 +32,7 @@ interface HeaderProps {
   onOpenAiAssistant: () => void;
   onOpenSupabaseModal: () => void;
   onReplaySplash?: () => void;
+  onOpenWebsite?: () => void;
   onNavigateTab?: (tabId: string) => void;
 }
 
@@ -44,6 +46,7 @@ export const Header: React.FC<HeaderProps> = ({
   onOpenAiAssistant,
   onOpenSupabaseModal,
   onReplaySplash,
+  onOpenWebsite,
   onNavigateTab,
 }) => {
   const { url, key } = getSupabaseCredentials();
@@ -214,6 +217,18 @@ export const Header: React.FC<HeaderProps> = ({
 
       {/* Right Tools & Status */}
       <div className="flex items-center gap-3">
+        {/* Return to Public Editorial Website */}
+        {onOpenWebsite && (
+          <button
+            onClick={onOpenWebsite}
+            title="View VT Developers Public Website"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-2xl bg-[#0E1424] border border-white/10 text-xs font-semibold text-slate-300 hover:text-cyan-300 hover:border-cyan-500/40 transition cursor-pointer"
+          >
+            <Globe className="w-3.5 h-3.5 text-emerald-400" />
+            <span className="hidden xl:inline text-[11px] font-mono">Website</span>
+          </button>
+        )}
+
         {/* Replay Construction Intro Screen Button */}
         {onReplaySplash && (
           <button

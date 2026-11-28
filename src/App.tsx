@@ -21,12 +21,15 @@ import { AICopilotDrawer } from './components/AICopilotDrawer';
 import { QuickCreateModal } from './components/QuickCreateModal';
 import { SupabaseModal } from './components/SupabaseModal';
 import { ConstructionSplashScreen } from './components/ConstructionSplashScreen';
+import { VTWebsiteView } from './components/VTWebsiteView';
 import { organizations, initialProjects, demoProjects } from './data/mockData';
 import { Organization, TenantId, UserProfile, UserRole, Project } from './types';
 import { dbFetchProjects } from './lib/supabase';
 
 export const App: React.FC = () => {
-  // Splash screen starts false so user lands directly into the interactive dashboard
+  // Landing mode: 'website' (Briklay-inspired editorial residential site) or 'erp' (BuildOS Operations)
+  const [viewMode, setViewMode] = useState<'website' | 'erp'>('website');
+  // Splash screen starts false so user lands directly into the website
   const [showSplash, setShowSplash] = useState(false);
   const [currentOrgId, setCurrentOrgId] = useState<TenantId>('vt-dev');
   const [currentRole, setCurrentRole] = useState<UserRole>('Owner');
@@ -123,6 +126,20 @@ export const App: React.FC = () => {
     setProjects([p, ...projects]);
   };
 
+  if (viewMode === 'website') {
+    return (
+      <>
+        <VTWebsiteView
+          onEnterErp={() => setViewMode('erp')}
+          onOpenSiteIntro={() => setShowSplash(true)}
+        />
+        {showSplash && (
+          <ConstructionSplashScreen onEnter={() => setShowSplash(false)} />
+        )}
+      </>
+    );
+  }
+
   return (
     <div
       data-theme={theme}
@@ -156,6 +173,7 @@ export const App: React.FC = () => {
           onOpenAiAssistant={() => setIsAiOpen(true)}
           onOpenSupabaseModal={() => setIsSupabaseModalOpen(true)}
           onReplaySplash={() => setShowSplash(true)}
+          onOpenWebsite={() => setViewMode('website')}
           onNavigateTab={(tab) => setActiveTab(tab)}
         />
 

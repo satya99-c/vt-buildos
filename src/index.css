@@ -242,18 +242,130 @@ input[type="date"]::-webkit-calendar-picker-indicator:hover {
   background-color: #1C1C1C !important;
 }
 
-/* Neutral borders in dark mode */
+/* Neutral borders in dark mode (remove noisy colored borders) */
 [data-theme="dark"] .border-slate-800,
 [data-theme="dark"] [class*="border-slate-800"],
+[data-theme="dark"] [class*="border-cyan-"],
+[data-theme="dark"] [class*="border-purple-"],
+[data-theme="dark"] [class*="border-indigo-"],
 .dark-theme .border-slate-800,
-.dark-theme [class*="border-slate-800"] {
-  border-color: rgba(255, 255, 255, 0.08) !important;
+.dark-theme [class*="border-slate-800"],
+.dark-theme [class*="border-cyan-"],
+.dark-theme [class*="border-purple-"],
+.dark-theme [class*="border-indigo-"] {
+  border-color: rgba(255, 255, 255, 0.09) !important;
 }
 [data-theme="dark"] .border-slate-700,
 [data-theme="dark"] [class*="border-slate-700"],
 .dark-theme .border-slate-700,
 .dark-theme [class*="border-slate-700"] {
-  border-color: rgba(255, 255, 255, 0.12) !important;
+  border-color: rgba(255, 255, 255, 0.13) !important;
+}
+
+/* Editorial Serif Headings in Dark Mode for unified architectural brand */
+[data-theme="dark"] h1,
+[data-theme="dark"] h2,
+[data-theme="dark"] h3,
+.dark-theme h1,
+.dark-theme h2,
+.dark-theme h3 {
+  font-family: 'Fraunces', Georgia, serif !important;
+  font-variation-settings: "SOFT" 60, "WONK" 0;
+  letter-spacing: -0.025em;
+}
+
+/* Executive Monochrome & Restrained Accents (eliminate flashy rainbow neon colors) */
+[data-theme="dark"] .text-cyan-400,
+[data-theme="dark"] .text-cyan-300,
+[data-theme="dark"] .text-sky-400,
+[data-theme="dark"] .text-blue-400,
+[data-theme="dark"] .text-indigo-400,
+[data-theme="dark"] .text-purple-400,
+[data-theme="dark"] .text-purple-300,
+.dark-theme .text-cyan-400,
+.dark-theme .text-cyan-300,
+.dark-theme .text-sky-400,
+.dark-theme .text-blue-400,
+.dark-theme .text-indigo-400,
+.dark-theme .text-purple-400,
+.dark-theme .text-purple-300 {
+  color: #E4E4E7 !important;
+}
+
+[data-theme="dark"] .text-emerald-400,
+[data-theme="dark"] .text-emerald-300,
+.dark-theme .text-emerald-400,
+.dark-theme .text-emerald-300 {
+  color: #6EE7B7 !important;
+}
+
+[data-theme="dark"] .text-amber-400,
+[data-theme="dark"] .text-amber-300,
+.dark-theme .text-amber-400,
+.dark-theme .text-amber-300 {
+  color: #E5C07B !important;
+}
+
+[data-theme="dark"] .text-rose-400,
+[data-theme="dark"] .text-rose-300,
+.dark-theme .text-rose-400,
+.dark-theme .text-rose-300 {
+  color: #E07A5F !important;
+}
+
+/* Neutralize flashy tinted badge backgrounds in dark mode */
+[data-theme="dark"] .bg-\[\#102422\],
+[data-theme="dark"] .bg-\[\#261E14\],
+[data-theme="dark"] .bg-\[\#0E251E\],
+[data-theme="dark"] .bg-\[\#2E1418\],
+[data-theme="dark"] [class*="bg-cyan-400/10"],
+[data-theme="dark"] [class*="bg-cyan-500/10"],
+[data-theme="dark"] [class*="bg-purple-500/10"],
+[data-theme="dark"] [class*="bg-indigo-500/10"],
+.dark-theme .bg-\[\#102422\],
+.dark-theme .bg-\[\#261E14\],
+.dark-theme .bg-\[\#0E251E\],
+.dark-theme .bg-\[\#2E1418\],
+.dark-theme [class*="bg-cyan-400/10"],
+.dark-theme [class*="bg-cyan-500/10"],
+.dark-theme [class*="bg-purple-500/10"],
+.dark-theme [class*="bg-indigo-500/10"] {
+  background-color: #161616 !important;
+}
+
+/* Primary CTA Buttons & Active Sidebar Tabs -> Crisp Off-White (#F4F4F5) with Black Ink */
+[data-theme="dark"] .bg-cyan-400,
+[data-theme="dark"] [class*="bg-cyan-400"],
+[data-theme="dark"] .bg-cyan-500,
+[data-theme="dark"] .bg-gradient-to-r,
+.dark-theme .bg-cyan-400,
+.dark-theme [class*="bg-cyan-400"],
+.dark-theme .bg-cyan-500,
+.dark-theme .bg-gradient-to-r {
+  background: #F4F4F5 !important;
+  background-color: #F4F4F5 !important;
+  color: #09090B !important;
+}
+
+[data-theme="dark"] .bg-cyan-400:hover,
+[data-theme="dark"] [class*="bg-cyan-400"]:hover,
+[data-theme="dark"] .bg-gradient-to-r:hover,
+.dark-theme .bg-cyan-400:hover,
+.dark-theme [class*="bg-cyan-400"]:hover,
+.dark-theme .bg-gradient-to-r:hover {
+  background: #FFFFFF !important;
+  background-color: #FFFFFF !important;
+}
+
+[data-theme="dark"] .bg-cyan-400 *,
+[data-theme="dark"] [class*="bg-cyan-400"] *,
+[data-theme="dark"] .bg-cyan-500 *,
+[data-theme="dark"] .bg-gradient-to-r *,
+.dark-theme .bg-cyan-400 *,
+.dark-theme [class*="bg-cyan-400"] *,
+.dark-theme .bg-cyan-500 *,
+.dark-theme .bg-gradient-to-r * {
+  color: #09090B !important;
 }
 
 /* ==========================================================================

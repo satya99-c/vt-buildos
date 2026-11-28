@@ -535,11 +535,21 @@ input[type="date"]::-webkit-calendar-picker-indicator:hover {
   color: rgba(22, 48, 43, 0.56) !important;
 }
 
-/* Replace Neon Cyan Accents with Deep Forest Pine & Muted Sage */
+/* Replace Neon Cyan, Purple, Blue & Indigo Accents with Deep Forest Pine & Muted Sage */
 [data-theme="light"] .text-cyan-400,
 [data-theme="light"] .text-cyan-300,
+[data-theme="light"] .text-sky-400,
+[data-theme="light"] .text-blue-400,
+[data-theme="light"] .text-indigo-400,
+[data-theme="light"] .text-purple-400,
+[data-theme="light"] .text-purple-300,
 .light-theme .text-cyan-400,
-.light-theme .text-cyan-300 {
+.light-theme .text-cyan-300,
+.light-theme .text-sky-400,
+.light-theme .text-blue-400,
+.light-theme .text-indigo-400,
+.light-theme .text-purple-400,
+.light-theme .text-purple-300 {
   color: #16302b !important;
 }
 
@@ -564,7 +574,34 @@ input[type="date"]::-webkit-calendar-picker-indicator:hover {
   color: #b42318 !important;
 }
 
-/* Warm Greige Hairline Borders (#e6e1d9) */
+/* Neutralize flashy tinted badge & icon backdrops in Light Mode */
+[data-theme="light"] [class*="bg-cyan-400/"],
+[data-theme="light"] [class*="bg-cyan-500/"],
+[data-theme="light"] [class*="bg-purple-"],
+[data-theme="light"] [class*="bg-indigo-"],
+[data-theme="light"] [class*="bg-blue-500/"],
+[data-theme="light"] [class*="bg-sky-500/"],
+[data-theme="light"] [class*="bg-amber-500/"],
+[data-theme="light"] [class*="bg-rose-500/"],
+.light-theme [class*="bg-cyan-400/"],
+.light-theme [class*="bg-cyan-500/"],
+.light-theme [class*="bg-purple-"],
+.light-theme [class*="bg-indigo-"],
+.light-theme [class*="bg-blue-500/"],
+.light-theme [class*="bg-sky-500/"],
+.light-theme [class*="bg-amber-500/"],
+.light-theme [class*="bg-rose-500/"] {
+  background-color: #f4f2ee !important;
+}
+
+[data-theme="light"] [class*="bg-emerald-500/"],
+[data-theme="light"] [class*="bg-emerald-400/"],
+.light-theme [class*="bg-emerald-500/"],
+.light-theme [class*="bg-emerald-400/"] {
+  background-color: #eaf1ed !important;
+}
+
+/* Warm Greige Hairline Borders (#e6e1d9) across all cards & badges */
 [data-theme="light"] .border-slate-800,
 [data-theme="light"] .border-slate-700,
 [data-theme="light"] [class*="border-slate-800"],
@@ -573,6 +610,12 @@ input[type="date"]::-webkit-calendar-picker-indicator:hover {
 [data-theme="light"] [class*="border-white/10"],
 [data-theme="light"] [class*="border-white/15"],
 [data-theme="light"] [class*="border-white/20"],
+[data-theme="light"] [class*="border-emerald-"],
+[data-theme="light"] [class*="border-amber-"],
+[data-theme="light"] [class*="border-rose-"],
+[data-theme="light"] [class*="border-purple-"],
+[data-theme="light"] [class*="border-indigo-"],
+[data-theme="light"] [class*="border-blue-"],
 .light-theme .border-slate-800,
 .light-theme .border-slate-700,
 .light-theme [class*="border-slate-800"],
@@ -580,7 +623,13 @@ input[type="date"]::-webkit-calendar-picker-indicator:hover {
 .light-theme [class*="border-white/5"],
 .light-theme [class*="border-white/10"],
 .light-theme [class*="border-white/15"],
-.light-theme [class*="border-white/20"] {
+.light-theme [class*="border-white/20"],
+.light-theme [class*="border-emerald-"],
+.light-theme [class*="border-amber-"],
+.light-theme [class*="border-rose-"],
+.light-theme [class*="border-purple-"],
+.light-theme [class*="border-indigo-"],
+.light-theme [class*="border-blue-"] {
   border-color: #e6e1d9 !important;
 }
 
@@ -591,30 +640,38 @@ input[type="date"]::-webkit-calendar-picker-indicator:hover {
   border-color: rgba(22, 48, 43, 0.22) !important;
 }
 
-/* Primary CTA Buttons & Active Sidebar Tabs -> Deep Forest Pine (#16302b) with Cream Text */
+/* Primary CTA Buttons, Gradient Buttons & Active Sidebar Tabs -> Deep Forest Pine (#16302b) with Cream Text */
 [data-theme="light"] .bg-cyan-400,
 [data-theme="light"] [class*="bg-cyan-400"],
 [data-theme="light"] .bg-cyan-500,
+[data-theme="light"] .bg-gradient-to-r,
 .light-theme .bg-cyan-400,
 .light-theme [class*="bg-cyan-400"],
-.light-theme .bg-cyan-500 {
+.light-theme .bg-cyan-500,
+.light-theme .bg-gradient-to-r {
+  background: #16302b !important;
   background-color: #16302b !important;
   color: #fcfaf6 !important;
 }
 
 [data-theme="light"] .bg-cyan-400:hover,
 [data-theme="light"] [class*="bg-cyan-400"]:hover,
+[data-theme="light"] .bg-gradient-to-r:hover,
 .light-theme .bg-cyan-400:hover,
-.light-theme [class*="bg-cyan-400"]:hover {
+.light-theme [class*="bg-cyan-400"]:hover,
+.light-theme .bg-gradient-to-r:hover {
+  background: #1f423b !important;
   background-color: #1f423b !important;
 }
 
 [data-theme="light"] .bg-cyan-400 *,
 [data-theme="light"] [class*="bg-cyan-400"] *,
 [data-theme="light"] .bg-cyan-500 *,
+[data-theme="light"] .bg-gradient-to-r *,
 .light-theme .bg-cyan-400 *,
 .light-theme [class*="bg-cyan-400"] *,
-.light-theme .bg-cyan-500 * {
+.light-theme .bg-cyan-500 *,
+.light-theme .bg-gradient-to-r * {
   color: #fcfaf6 !important;
 }
 
